@@ -24,42 +24,52 @@ class nivel1 extends Phaser.Scene
         ////////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+        this.dashing = false;
 
         //////ANIMATION
         this.loadAnimations();
         loadAnimations()
         {
             this.anims.create(
-                {
-                    key: 'idle',
-                    frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
-                    frameRate: 10,
-                    repeat: -1
-                });
+            {
+                key: 'idle',
+                frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
+                frameRate: 10,
+                repeat: -1
+            });
                 
-                this.anims.create(
-                {
-                    key: 'run_left',
-                    frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
-                    frameRate: 10,
-                    repeat: -1
-                });
+            this.anims.create(
+            {
+                key: 'run_left',
+                frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
+                frameRate: 10,
+                repeat: -1
+            });
         
-                this.anims.create(
-                {
-                    key: 'run_right',
-                    frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-                    frameRate: 10,
-                    repeat: -1
-                });
+            this.anims.create(
+            {
+                key: 'run_right',
+                frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+                frameRate: 10,
+                repeat: -1
+            });
 
-                this.anims.create(
-                    {
-                        key: 'jump',
-                        frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-                        frameRate: 10,
-                        repeat: -1
-                    });
+            this.anims.create(
+            {
+                key: 'jump',
+                frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+                frameRate: 10,
+                repeat: -1
+            });
+
+            this.anims.create(
+            {
+                key: 'dash',
+                frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+                frameRate: 10,
+                repeat: -1
+            });    
         };
 
         
@@ -90,8 +100,16 @@ class nivel1 extends Phaser.Scene
             _player.anims.play('jump',true);
         }
 
-        //PLAYER JUMP
-
-        
+        if (this.shiftKey.isDown) //&& !this.dashing
+        {
+            //this.dashing = true;
+            _player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
+            _player.anims.play('dash',true);
+            
+            //to set the dash back to false
+            //this.time.delayedCall(200, () => {
+            //    this.dashing = false;
+            //});
+        }  
     }
 }
