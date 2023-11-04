@@ -1,3 +1,8 @@
+var gamePrefs=
+{
+    PLAYER_SPEED:2,
+}
+
 var config = 
 {
     type: Phaser.AUTO,

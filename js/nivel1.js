@@ -23,6 +23,7 @@ class nivel1 extends Phaser.Scene
 
         ////////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
+        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         //////ANIMATION
         this.loadAnimations();
@@ -31,7 +32,7 @@ class nivel1 extends Phaser.Scene
             this.anims.create(
                 {
                     key: 'idle',
-                    frames:this.anims.generateFrameNumbers('nave', {start:0, end: 1}),
+                    frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
                     frameRate: 10,
                     repeat: -1
                 });
@@ -39,7 +40,7 @@ class nivel1 extends Phaser.Scene
                 this.anims.create(
                 {
                     key: 'run_left',
-                    frames:this.anims.generateFrameNumbers('nave', {start:2, end: 3}),
+                    frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
                     frameRate: 10,
                     repeat: -1
                 });
@@ -47,11 +48,21 @@ class nivel1 extends Phaser.Scene
                 this.anims.create(
                 {
                     key: 'run_right',
-                    frames:this.anims.generateFrameNumbers('nave', {start:4, end: 5}),
+                    frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
                     frameRate: 10,
                     repeat: -1
                 });
+
+                this.anims.create(
+                    {
+                        key: 'jump',
+                        frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+                        frameRate: 10,
+                        repeat: -1
+                    });
         };
+
+        
     }
 
     
@@ -61,16 +72,26 @@ class nivel1 extends Phaser.Scene
         //////PLAYER MOVEMENT
         if(this.cursores.left.isDown)
         {
-            _player.body.velocity.x -= gamePrefs.NAVE_SPEED;
+            _player.body.velocity.x -= gamePrefs.PLAYER_SPEED;
             _player.anims.play('left',true);
         }else
         if(this.cursores.right.isDown)
         {
-            _player.body.velocity.x += gamePrefs.NAVE_SPEED;
+            _player.body.velocity.x += gamePrefs.PLAYER_SPEED;
             _player.anims.play('right',true);
         }else
         {
             _player.anims.play('idle',true);
         } 
+
+        if(this.spaceKey.isDown)
+        {
+            _player.setVelocityY(-300);
+            _player.anims.play('jump',true);
+        }
+
+        //PLAYER JUMP
+
+        
     }
 }
