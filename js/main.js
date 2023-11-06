@@ -1,12 +1,13 @@
 var gamePrefs=
 {
     PLAYER_SPEED:2,
+    PLAYER_JUMP:60,
 }
 
 var config = 
 {
     type: Phaser.AUTO,
-    witdh: 800,
+    width: 800,
     height: 600,
     scene:[nivel1], //array con las escenas
     render:
