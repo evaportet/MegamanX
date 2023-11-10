@@ -10,6 +10,7 @@ class nivel1 extends Phaser.Scene
         //////PLAYER ASSETS
         this.load.setPath('assets/img');
         this.load.image('player','playerIdle.png');
+        this.load.spritesheet('enemyWalk', 'enemies.png', {frameWidth: 51, frameHeight: 61});
     }
 
     create()
@@ -21,7 +22,10 @@ class nivel1 extends Phaser.Scene
         this._player.body.collideWorldBounds = true;
         this._player.body.setGravityY(300);
 
-        ////////KEY INPUT
+        ////// ENEMY WALK
+        this.enemyWalk = this.add.sprite(600 , 573, 'enemyWalk');
+
+        //;//////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
@@ -83,13 +87,13 @@ class nivel1 extends Phaser.Scene
         //////PLAYER MOVEMENT
         if(this.cursores.left.isDown)
         {
-            this._player.body.velocity.x -= gamePrefs.PLAYER_SPEED;
+            this._player.body.velocity.x = -gamePrefs.PLAYER_SPEED;
             //console.log('Moving left');
             //_player.anims.play('left',true);
         }else
         if(this.cursores.right.isDown)
         {
-            this._player.body.velocity.x += gamePrefs.PLAYER_SPEED;
+            this._player.body.velocity.x = gamePrefs.PLAYER_SPEED;
             //console.log('Moving right');
             //_player.anims.play('right',true);
         }else
