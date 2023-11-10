@@ -12,6 +12,7 @@ class nivel1 extends Phaser.Scene
         this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('enemyWalk', 'enemies.png', {frameWidth: 51, frameHeight: 61});
+        this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
     }
 
     create()
@@ -29,20 +30,67 @@ class nivel1 extends Phaser.Scene
         ////// ENEMY WALK
         this.enemyWalk = this.add.sprite(300,155, 'enemyWalk').setOrigin(0);
 
+        
+        this.loadPools();
+
         //;//////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
         this.dashing = false;
 
+
         //////ANIMATION
         //this.loadAnimations();
+
+
+        /////// DISPARO
+        this.cursores.up.on
+        (
+            'down',
+            function()
+            {
+                this.createBullet();
+            },
+            this
+        );
+
 
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
         this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
         
+    }
+
+    loadPools()
+    {
+        this.bulletPool = this.physics.add.group();
+         //this.enemyPool = this.physics.add.group();
+
+    }
+
+    createBullet()
+    {
+        //Mirar si hay alguna bala reciclable en la pool
+        var _bullet = this.bulletPool.getFirst(false);
+        
+        if(!_bullet)
+        {//Que no? La creo
+            console.log('creando bala');
+            _bullet = new bulletPrefab(this,this._player.x,this._player.y,'bullet');
+            this.bulletPool.add(_bullet);
+        }else
+        {//Que si? La reciclo
+            console.log('reciclando bala');
+            _bullet.body.reset(this._player.x,this._player.y);
+            _bullet.active = true;
+        }
+        //Hago cosas con la bala
+        //Dar velocidad
+        _bullet.body.setVelocityX(gamePrefs.BULLET_SPEED);
+        //Ejecuta sonido
+        //this.shoot.play();
     }
 
     // loadAnimations()
