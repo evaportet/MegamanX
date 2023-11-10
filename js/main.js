@@ -5,7 +5,8 @@ var gamePrefs=
     gameWidth:424,
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,
-    STAGE_BG_HEIGHT:212
+    STAGE_BG_HEIGHT:212,
+    BULLET_SPEED:150
 }
 
 var config = 
@@ -28,7 +29,7 @@ var config =
         default:'arcade',
         arcade:
         {
-            gravity:{y:100} //we will need to change this
+            gravity:{y:0} //we will need to change this
         }
     }
 };
