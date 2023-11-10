@@ -2,17 +2,13 @@ var gamePrefs=
 {
     PLAYER_SPEED: 100,
     PLAYER_JUMP: 170,
-    gameWidth:424,
-    gameHeight:212,
-    STAGE_BG_WIDTH: 7689,
-    STAGE_BG_HEIGHT:212
 }
 
 var config = 
 {
     type: Phaser.AUTO,
-    width: gamePrefs.gameWidth,
-    height: gamePrefs.gameHeight,
+    width: 800,
+    height: 600,
     scene:[nivel1], //array con las escenas
     render:
     {
