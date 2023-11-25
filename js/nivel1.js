@@ -11,7 +11,7 @@ class nivel1 extends Phaser.Scene
         this.load.setPath('assets/img');
         this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
-        this.load.spritesheet('enemyWalk', 'enemies.png', {frameWidth: 51, frameHeight: 61});
+        this.load.spritesheet('walker', 'enemies.png', {frameWidth: 51, frameHeight: 61});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
     }
 
@@ -28,7 +28,7 @@ class nivel1 extends Phaser.Scene
         this._player.body.setGravityY(300);
 
         ////// ENEMY WALK
-        this.enemyWalk = this.add.sprite(300,155, 'enemyWalk').setOrigin(0);
+        this.enemyWalk = new walkerPrefab(this, 300, 187, 100, 300);
 
         
         this.loadPools();
@@ -54,8 +54,6 @@ class nivel1 extends Phaser.Scene
             },
             this
         );
-
-
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
