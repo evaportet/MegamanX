@@ -11,7 +11,7 @@ class nivel1 extends Phaser.Scene
         this.load.setPath('assets/img');
         this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
-        this.load.spritesheet('enemyWalk', 'enemies.png', {frameWidth: 51, frameHeight: 61});
+        this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
     }
 
@@ -28,7 +28,7 @@ class nivel1 extends Phaser.Scene
         this._player.body.setGravityY(300);
 
         ////// ENEMY WALK
-        this.enemyWalk = this.add.sprite(300,155, 'enemyWalk').setOrigin(0);
+        this.enemyWalk = new walkerPrefab(this, 300, 187, 100, 300);
 
         
         this.loadPools();
@@ -41,7 +41,7 @@ class nivel1 extends Phaser.Scene
 
 
         //////ANIMATION
-        //this.loadAnimations();
+        this.loadAnimationsWalker();
 
 
         /////// DISPARO
@@ -54,8 +54,6 @@ class nivel1 extends Phaser.Scene
             },
             this
         );
-
-
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
@@ -93,48 +91,59 @@ class nivel1 extends Phaser.Scene
         //this.shoot.play();
     }
 
-    // loadAnimations()
-    //     {
-    //         this.anims.create(
-    //         {
-    //             key: 'idle',
-    //             frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
-    //             frameRate: 10,
-    //             repeat: -1
-    //         });
+    loadAnimations()
+    {
+        this.anims.create(
+        {
+            key: 'idle',
+            frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
+            frameRate: 10,
+            repeat: -1
+        });
                 
-    //         this.anims.create(
-    //         {
-    //             key: 'run_left',
-    //             frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
-    //             frameRate: 10,
-    //             repeat: -1
-    //         });
+        this.anims.create(
+        {
+            key: 'run_left',
+            frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
+            frameRate: 10,
+            repeat: -1
+        });
         
-    //         this.anims.create(
-    //         {
-    //             key: 'run_right',
-    //             frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-    //             frameRate: 10,
-    //             repeat: -1
-    //         });
+        this.anims.create(
+            {
+            key: 'run_right',
+            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+            frameRate: 10,
+            repeat: -1
+        });
 
-    //         this.anims.create(
-    //         {
-    //             key: 'jump',
-    //             frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-    //             frameRate: 10,
-    //             repeat: -1
-    //         });
+        this.anims.create(
+        {
+            key: 'jump',
+            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+            frameRate: 10,
+            repeat: -1
+        });
 
-    //         this.anims.create(
-    //         {
-    //             key: 'dash',
-    //             frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-    //             frameRate: 10,
-    //             repeat: -1
-    //         });    
-    //     };   
+        this.anims.create(
+        {
+            key: 'dash',
+            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
+            frameRate: 10,
+            repeat: -1
+        }); 
+    };   
+
+    loadAnimationsWalker()
+    {
+        this.anims.create(
+            {
+                key: 'walk',
+                frames:this.anims.generateFrameNumbers('walker', {start:2, end: 9}),
+                frameRate: 10,
+                repeat: -1
+            });
+    }
 
     update()
     { 
