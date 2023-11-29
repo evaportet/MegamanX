@@ -7,7 +7,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         _scene.physics.world.enable(this);
         this.anims.play(_spriteTag,true);
         this.scene = _scene;
-        this.direccion = 1;
+        this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
         //this.setColliders();
     }
@@ -32,6 +32,8 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
 
     preUpdate(time,delta)
     {        
+        this.anims.play('walk', true);
+        
         if(this.body.position.x < this.leftPatrol || this.body.position.x > this.rightPatrol)
         {
             this.direccion *= -1;
