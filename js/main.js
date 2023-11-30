@@ -30,7 +30,8 @@ var config =
         default:'arcade',
         arcade:
         {
-            gravity:{y:0} //we will need to change this
+            gravity:{y:0}, //we will need to change this
+            debug:true
         }
     }
 };

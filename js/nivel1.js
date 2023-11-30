@@ -23,7 +23,6 @@ class nivel1 extends Phaser.Scene
         //////PLAYER
         this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');
         //_player = this.physics.add.sprite(config.width/2,config.height*.95,'player');
-        this.physics.world.enable(this._player);
         this._player.body.collideWorldBounds = true;
         this._player.body.setGravityY(300);
 
@@ -33,19 +32,12 @@ class nivel1 extends Phaser.Scene
         
         this.loadPools();
 
-        //;//////KEY INPUT
-        this.cursores = this.input.keyboard.createCursorKeys();
-        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
-        this.dashing = false;
-
-
         //////ANIMATION
         this.loadAnimationsWalker();
 
 
         /////// DISPARO
-        this.cursores.up.on
+        /*this.cursores.up.on
         (
             'down',
             function()
@@ -53,7 +45,31 @@ class nivel1 extends Phaser.Scene
                 this.createBullet();
             },
             this
-        );
+        );*/
+
+        /////// ESPADA
+       // this.cursores.shift.on
+        //(
+        //    'down',
+         //   function()
+         //   {
+               //this._player.Sword(_player, enemyWalk);
+
+               /* if(enemyWalk.body.touching && this._player.body.touching)
+               {
+                enemyWalk.destroy();
+                   this._player.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
+               } *//* else
+               {
+                   this.hero.health--;
+                   this.scene.updateHealth();
+                   this.hero.body.reset(65,100);
+                   this.scene.cameras.main.shake(500,0.05);
+                   this.scene.cameras.main.flash(250,255,0,0);    
+               } */
+           // },
+           // this
+       // );
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
@@ -91,6 +107,7 @@ class nivel1 extends Phaser.Scene
         //this.shoot.play();
     }
 
+
     loadAnimations()
     {
         this.anims.create(
@@ -121,12 +138,12 @@ class nivel1 extends Phaser.Scene
         {
             key: 'jump',
             frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create(
-        {
+            frameRate: 10, 
+            repeat: -1 
+        }); 
+ 
+        this.anims.create( 
+        { 
             key: 'dash',
             frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
             frameRate: 10,
@@ -147,7 +164,7 @@ class nivel1 extends Phaser.Scene
 
     update()
     { 
-        //CHECK ON GROUND PLAYER
+         /* //CHECK ON GROUND PLAYER
         const onGround = this._player.body.onFloor() || this._player.body.touching.down;
         
         //////PLAYER MOVEMENT
@@ -183,6 +200,6 @@ class nivel1 extends Phaser.Scene
             //this.time.delayedCall(200, () => {
             //    this.dashing = false;
             //});
-        }  
-    }
+        }   */
+    } 
 }

@@ -9,26 +9,26 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         this.scene = _scene;
         this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-        //this.setColliders();
+        this.setColliders();
     }
 
-//    setColliders()
-//    {
-//        this.scene.physics.add.overlap
-//        (
-//            this.scene.hero,
-//            this,
-//            this.scene.hero.hitHero,
-//            null,
-//            this.scene.hero
-//        );
-//
-//        this.scene.physics.add.collider
-//        (
-//            this,
-//            this.scene.walls
-//        );
-//    }
+   setColliders()
+   {
+       this.scene.physics.add.overlap
+       (
+           this.scene._player,
+           this,
+/*        this.scene.hero.hitHero,
+           null,
+           this.scene.hero */
+       );
+
+      /*  this.scene.physics.add.collider
+       (
+           this,
+           this.scene.walls
+       ); */
+   }
 
     preUpdate(time,delta)
     {        
