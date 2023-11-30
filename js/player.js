@@ -7,22 +7,23 @@ class player extends Phaser.GameObjects.Sprite
         _scene.physics.world.enable(this);
         this.scene = _scene;
         this._player = this;
-        //this.setColliders();
+        this.setColliders();
         //CURSORES
         //;//////KEY INPUT
-        this.cursores = this.scene.input.keyboard.createCursorKeys();
-       // this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
-       //d this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        // this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+        //d this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.dashing = false;
+        this.cursores = this.scene.input.keyboard.createCursorKeys();
     }
          setColliders()
         {
             this.scene.physics.add.collider
             (
-                this.hero,
+                this,
                 this.scene.walls // hay que crear las plataformas
             );        
         } 
+    
 
     create(){
                 /////// DISPARO
@@ -35,6 +36,8 @@ class player extends Phaser.GameObjects.Sprite
             },
             this
         ); */
+
+        
     }
     
     Sword(_player,_enemy)
@@ -54,26 +57,30 @@ class player extends Phaser.GameObjects.Sprite
         
        //////PLAYER MOVEMENT
        if(this.cursores.left.isDown)
-       {
-           this._player.body.velocity.x = -gamePrefs.PLAYER_SPEED;
-           //console.log('Moving left');
-           //_player.anims.play('left',true);
-       }else
-       if(this.cursores.right.isDown)
-       {
-           this._player.body.velocity.x = gamePrefs.PLAYER_SPEED;
-           //console.log('Moving right');
-           //_player.anims.play('right',true);
-       }else
-       {
-           this._player.body.velocity.x = 0;
-           //_player.anims.play('idle',true);
-       } 
-
-       
-       if (this.cursores.up.isDown && this._player.body.onFloor()) {
-           this._player.body.velocity.y -= gamePrefs.PLAYER_JUMP;
-       }
+        { //ME MUEVO A LA IZQUIERDA
+            this.body.setVelocityX(-gamePrefs.PLAYER_SPEED);
+            this.setFlipX(true);
+            //this.anims.play('run',true);
+        }else
+        if(this.cursores.right.isDown)
+        { //ME MUEVO A LA DERECHA
+            this.body.setVelocityX(gamePrefs.PLAYER_SPEED);
+            this.setFlipX(false);
+            //this.anims.play('run',true);
+        }else
+        { //NO ME MUEVO AT ALL
+            this.body.setVelocityX(0);
+            //this.hero.anims.stop().setFrame(0);
+        }    
+        
+        //SALTO
+        if(this.cursores.space.isDown
+          //&& this.hero.body.blocked.down
+          && this.body.onFloor()
+          && Phaser.Input.Keyboard.DownDuration(this.cursores.space,250))
+        {
+            this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
+        }
 
       /* if (this.shiftKey.isDown) //&& !this.dashing
        {
@@ -86,6 +93,8 @@ class player extends Phaser.GameObjects.Sprite
            //    this.dashing = false;
            //});
        }  */
+
+       
   
           super.preUpdate(time,delta);
     }

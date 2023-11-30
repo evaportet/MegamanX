@@ -13,17 +13,44 @@ class nivel1 extends Phaser.Scene
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
+       // this.load.image('platform','platform.png');
+
+        this.load.setPath('tilesets');
+        this.load.image('walls_tileset','tileset_walls.png');
+        this.load.image('moss_tileset','tileset_moss.png');
+        this.load.tilemapTiledJSON('level1','level1.json');
+        
     }
 
     create()
     { 
         //////BACKGROUND
         this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
+        //this.platform = this.physics.add.sprite(0,190, 'platform').setOrigin(0);
+        //this.platform.body.setAllowGravity(false);
+        //this.platform.body.setImmovable(true);
+        //Cargo el JSON
+        this.map = this.add.tilemap('level1');
+        //Cargo los tilesets
+        this.map.addTilesetImage('walls_tileset');
+        this.map.addTilesetImage('moss_tileset');
+        //Pinto las CAPAS/LAYERS
+        this.walls = this.map.createLayer('layer_walls','walls_tileset');
+        this.map.createLayer('layer_moss_up','moss_tileset');
+        this.map.createLayer('layer_moss_left','moss_tileset');
+        this.map.createLayer('layer_moss_right','moss_tileset');
+        this.map.createLayer('layer_moss_down','moss_tileset');
+
+        //Defino con qué se colisiona en la layer_walls
+        //this.map.setCollisionBetween(1,11,true,true,'layer_walls');
+        //Ponemos -1, ya que phaser lo interpreta como un 0 en el json 
+        this.map.setCollisionByExclusion(-1,true,true,'layer_walls'); 
 
         //////PLAYER
-        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');
+
+        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/2,'player');
         //_player = this.physics.add.sprite(config.width/2,config.height*.95,'player');
-        this._player.body.collideWorldBounds = true;
+        //this._player.body.collideWorldBounds = true;
         this._player.body.setGravityY(300);
 
         ////// ENEMY WALK
@@ -73,7 +100,7 @@ class nivel1 extends Phaser.Scene
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
-        this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
+        this.cameras.main.setBounds(0,0, gamePrefs.gameHeight, gamePrefs.gameWidth);
         
     }
 
@@ -164,42 +191,21 @@ class nivel1 extends Phaser.Scene
 
     update()
     { 
-         /* //CHECK ON GROUND PLAYER
-        const onGround = this._player.body.onFloor() || this._player.body.touching.down;
-        
-        //////PLAYER MOVEMENT
-        if(this.cursores.left.isDown)
+/*         if(this.enemyWalk.body.touching.up && this.hero.body.touching.down)
         {
-            this._player.body.velocity.x = -gamePrefs.PLAYER_SPEED;
-            //console.log('Moving left');
-            //_player.anims.play('left',true);
-        }else
-        if(this.cursores.right.isDown)
-        {
-            this._player.body.velocity.x = gamePrefs.PLAYER_SPEED;
-            //console.log('Moving right');
-            //_player.anims.play('right',true);
+            _enemy.health--;
+            if(_enemy.health<=0)
+            {
+                _enemy.destroy();
+            }
+            this.hero.body.setVelocityY(-gamePrefs.HERO_JUMP);
         }else
         {
-            this._player.body.velocity.x = 0;
-            //_player.anims.play('idle',true);
-        } 
-
-        
-        if (this.spaceKey.isDown && onGround) {
-            this._player.body.velocity.y -= gamePrefs.PLAYER_JUMP;
-        }
-
-        if (this.shiftKey.isDown) //&& !this.dashing
-        {
-            //this.dashing = true;
-            //this._player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
-            //_player.anims.play('dash',true);
-            
-            //to set the dash back to false
-            //this.time.delayedCall(200, () => {
-            //    this.dashing = false;
-            //});
-        }   */
+            this.hero.health--;
+            this.scene.updateHealth();
+            this.hero.body.reset(65,100);
+            this.scene.cameras.main.shake(500,0.05);
+            this.scene.cameras.main.flash(250,255,0,0);    
+        } */
     } 
 }

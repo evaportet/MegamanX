@@ -15,19 +15,19 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
    setColliders()
    {
        this.scene.physics.add.overlap
-       (
+       /* (
            this.scene._player,
            this,
-/*        this.scene.hero.hitHero,
+        this.scene.hero.hitHero,
            null,
-           this.scene.hero */
-       );
+           this.scene.hero 
+       ); */
 
-      /*  this.scene.physics.add.collider
+        this.scene.physics.add.collider
        (
            this,
            this.scene.walls
-       ); */
+       ); 
    }
 
     preUpdate(time,delta)
