@@ -29,14 +29,14 @@ class nivel1 extends Phaser.Scene
         this._player.body.setGravityY(300);
 
         ////// ENEMY WALK
-        this.enemyWalk = new walkerPrefab(this, 500, 187, 100, 300);
+        this.enemyWalk = new walkerPrefab(this, 300, 187, 100, 300);
 
         ////// ENEMY FLY
-        this.flyerWalk = new flyerPrefab(this, 700, 250, 100, 300);
+        this.flyerWalk = new flyerPrefab(this, 200, 250, 100, 300);
         
         this.loadPools();
 
-        //;//////KEY INPUT
+        ///////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
