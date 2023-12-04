@@ -33,6 +33,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
     preUpdate(time,delta)
     {        
         this.anims.play('walk', true);
+        this.anims.play('walkFlyer', true);
         
         if(this.body.position.x < this.leftPatrol || this.body.position.x > this.rightPatrol)
         {
