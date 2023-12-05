@@ -15,7 +15,7 @@ class walkerPrefab extends enemiesPrefab
         if(this.body.position.x < this.leftPatrol || this.body.position.x > this.rightPatrol)
         {
             this.direccion *= -1;
-            this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
+            this.body.setVelocityX(gamePrefs.WALKER_SPEED * this.direccion);
             this.flipX = !this.flipX;
         }
 
