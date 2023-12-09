@@ -198,8 +198,13 @@ class nivel1 extends Phaser.Scene
             this._player.body.velocity.y -= gamePrefs.PLAYER_JUMP;
         }
 
-        if (this.shiftKey.isDown) //&& !this.dashing
-        {
+        if (this.shiftKey.isDown){
+            this._player.hitSword;
+        }
+
+
+       // if (this.shiftKey.isDown) //&& !this.dashing
+        //{
             //this.dashing = true;
             //this._player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
             //_player.anims.play('dash',true);
@@ -208,6 +213,6 @@ class nivel1 extends Phaser.Scene
             //this.time.delayedCall(200, () => {
             //    this.dashing = false;
             //});
-        }  
+        //}  
     }
 }

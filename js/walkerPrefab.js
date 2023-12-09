@@ -8,6 +8,11 @@ class walkerPrefab extends enemiesPrefab
         console.log('wwwwwww')
     }
 
+    hitwalker(){
+       /*  this.scene.cameras.main.shake(500,0.05);
+        this.scene.cameras.main.flash(250,255,0,0);     */
+    }
+
     preUpdate(time,delta)
     {        
         this.anims.play('walk', true);

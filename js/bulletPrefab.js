@@ -6,7 +6,20 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
         super(_scene,_posX,_posY,_spriteTag);
         _scene.add.existing(this);
         this.nivel = _scene;
+        //this.setBulletColliders();
     }
+
+    setBulletColliders()
+   {
+       this.scene.physics.add.overlap
+       (
+           this.scene.enemyWalk,
+           this,
+           this.scene.enemyWalk.hitWalker,
+           null,
+           this.scene.enemyWalk 
+       );
+   }
 
     deActivate()
     {

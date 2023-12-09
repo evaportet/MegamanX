@@ -10,6 +10,26 @@ class player extends Phaser.GameObjects.Sprite
         //this.health = 2;
     }
 
+    hitPlayer(_player,_enemy)
+    {
+        if(_enemy.body.touching.up && this._player.body.touching.down)
+        {
+            _enemy.destroy();
+            this._player.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
+        }else
+        {
+            //this._player.health--;
+            //this.scene.updateHealth();
+            //this._player.body.reset(65,100);
+             this.scene.cameras.main.shake(500,0.05);
+            this.scene.cameras.main.flash(250,255,0,0);     
+        }
+    }
+
+    hitSword(){
+
+    }
+
     preUpdate(time,delta)
     {
         if(this.y>=config.height)
