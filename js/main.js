@@ -6,7 +6,7 @@ var gamePrefs=
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,
     STAGE_BG_HEIGHT:212,
-    BULLET_SPEED:150,
+    BULLET_SPEED:170,
     ENEMY_SPEED: 60,
     WALKER_SPEED: 60,
     FLYER_SPEED: 60

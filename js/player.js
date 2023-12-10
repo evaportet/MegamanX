@@ -24,12 +24,6 @@ class player extends Phaser.GameObjects.Sprite
         }
     }
 
-    loadPools()
-    {
-        this.bulletPool = this.physics.add.group();
-
-    }
-
     createBullet()
     {
         //Mirar si hay alguna bala reciclable en la pool
@@ -47,11 +41,15 @@ class player extends Phaser.GameObjects.Sprite
             _bullet.active = true;
         }
         //Hago cosas con la bala
-        //Dar velocidad
-        _bullet.body.setVelocityX(gamePrefs.BULLET_SPEED);
-        //Ejecuta sonido
-        //this.shoot.play();
-        
+        //Dar velocidad segun la direccion
+        if(this.flipX == true){
+            _bullet.body.setVelocityX(-gamePrefs.BULLET_SPEED);
+            _bullet.setFlipX(true);
+        }
+        else{
+            _bullet.body.setVelocityX(gamePrefs.BULLET_SPEED);
+            _bullet.setFlipX(false);
+        }
     }
 
     preUpdate(time,delta)
