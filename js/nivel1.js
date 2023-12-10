@@ -19,6 +19,24 @@ class nivel1 extends Phaser.Scene
     { 
         //////BACKGROUND
         this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
+        
+        //////MAP
+        //Cargo el JSON
+        this.map = this.add.tilemap('map1');
+        //Cargo los tilesets
+        //this.map.addTilesetImage('walls_tileset');
+        //this.map.addTilesetImage('moss_tileset');
+        //Pinto las CAPAS/LAYERS
+        //this.walls = this.map.createLayer('layer_walls','walls_tileset');
+        //this.map.createLayer('layer_moss_up','moss_tileset');
+        //this.map.createLayer('layer_moss_left','moss_tileset');
+        //this.map.createLayer('layer_moss_right','moss_tileset');
+        //this.map.createLayer('layer_moss_bottom','moss_tileset');
+
+        //Defino con qué se colisiona en la layer_walls
+        //this.map.setCollisionBetween(1,11,true,true,'layer_walls');
+        //Ponemos -1, ya que phaser lo interpreta como un 0 en el json 
+        //this.map.setCollisionByExclusion(-1,true,true,'layer_walls'); 
 
         //////PLAYER
         this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');
@@ -57,7 +75,7 @@ class nivel1 extends Phaser.Scene
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
-        this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
+        //this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
         
     }
 
