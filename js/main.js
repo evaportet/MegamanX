@@ -1,7 +1,7 @@
 var gamePrefs=
 {
     PLAYER_SPEED: 100,
-    PLAYER_JUMP: 170,
+    PLAYER_JUMP: 185,
     gameWidth:424,
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,

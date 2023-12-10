@@ -6,7 +6,7 @@ class player extends Phaser.GameObjects.Sprite
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
         this.body.collideWorldBounds = true; // a ver las fisicas...
-        this.body.setGravityY(200);
+        this.body.setGravityY(300);
         this.health = 5;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
     }
@@ -77,7 +77,7 @@ class player extends Phaser.GameObjects.Sprite
         //SALTO
         if(this.cursors.up.isDown && this.body.onFloor() && Phaser.Input.Keyboard.DownDuration(this.cursors.up,250))
         {
-            this.body.setVelocityY(-gamePrefs.PLAYER_SPEED);
+            this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
         //DISPARO

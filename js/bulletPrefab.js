@@ -20,6 +20,7 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
            null,
            this 
        ); 
+
    }
 
     deActivate()
