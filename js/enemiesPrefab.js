@@ -22,25 +22,12 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
            null,
            this.scene._player,  
        );
-
-       /* this.scene.physics.add.overlap
-       (
-           this.scene._bullet,
-           this,
-           this.die(),
-           null,
-           this.scene._bullet 
-       ); */
-
-       /* this.scene.physics.add.collider
-       (
-           this,
-           this.scene.walls
-       ); */
    }
+
    die(){
     //this.scene.cameras.main.shake(500,0.05);
     this.scene.cameras.main.flash(250,255,0,0);  
     console.log("morisionado")  
    }
+   
 }
