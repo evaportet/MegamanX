@@ -13,13 +13,16 @@ class flyerPrefab extends enemiesPrefab
     {        
         this.anims.play('walkFlyer', true);
         
-        if(this.body.position.x < this.leftPatrol || this.body.position.x > this.rightPatrol)
+        if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
         {
             this.direccion *= -1;
             this.body.setVelocityX(gamePrefs.FLYER_SPEED * this.direccion);
             this.flipX = !this.flipX;
         }
-
+        else if(this.body.position.x > this.leftPatrol && this.body.position.x < this.rightPatrol){
+            this.body.setVelocityX(gamePrefs.FLYER_SPEED * this.direccion);
+           // console.log('dentroooo')
+        }
         super.preUpdate(time, delta);
     }
 

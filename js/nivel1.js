@@ -29,12 +29,14 @@ class nivel1 extends Phaser.Scene
         this._player.body.setGravityY(300);
 
         ////// ENEMY WALK
-        this.enemyWalk = new walkerPrefab(this, 300, 187, 100, 300);
+        this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
 
         ////// ENEMY FLY
-        this.flyerWalk = new flyerPrefab(this, 300, 100, 250, 400);
+        this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);
         
+
         this.loadPools();
+
 
         ///////KEY INPUT
         this.cursores = this.input.keyboard.createCursorKeys();
@@ -93,6 +95,7 @@ class nivel1 extends Phaser.Scene
         _bullet.body.setVelocityX(gamePrefs.BULLET_SPEED);
         //Ejecuta sonido
         //this.shoot.play();
+        
     }
 
     loadAnimations()

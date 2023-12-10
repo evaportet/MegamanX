@@ -9,7 +9,7 @@ var gamePrefs=
     BULLET_SPEED:150,
     ENEMY_SPEED: 60,
     WALKER_SPEED: 60,
-    FLYER_SPEED: 90
+    FLYER_SPEED: 60
 }
 
 var config = 
