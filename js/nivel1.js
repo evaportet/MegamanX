@@ -12,6 +12,7 @@ class nivel1 extends Phaser.Scene
         this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
+        this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
     }
 
@@ -39,39 +40,20 @@ class nivel1 extends Phaser.Scene
         //this.map.setCollisionByExclusion(-1,true,true,'layer_walls'); 
 
         //////PLAYER
-        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');
-        //_player = this.physics.add.sprite(config.width/2,config.height*.95,'player');
-        this.physics.world.enable(this._player);
-        this._player.body.collideWorldBounds = true;
-        this._player.body.setGravityY(300);
+        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
 
         ////// ENEMY WALK
-        this.enemyWalk = new walkerPrefab(this, 300, 187, 100, 300);
+        this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
 
-        
+        ////// ENEMY FLY
+        this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
+
+        //LOAD POOLS
         this.loadPools();
-
-        //;//////KEY INPUT
-        this.cursores = this.input.keyboard.createCursorKeys();
-        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
-        this.dashing = false;
-
 
         //////ANIMATION
         this.loadAnimationsWalker();
-
-
-        /////// DISPARO
-        this.cursores.up.on
-        (
-            'down',
-            function()
-            {
-                this.createBullet();
-            },
-            this
-        );
+        this.loadAnimationsFlyer();
 
         //CAMERA
         this.cameras.main.startFollow(this._player);
@@ -82,31 +64,7 @@ class nivel1 extends Phaser.Scene
     loadPools()
     {
         this.bulletPool = this.physics.add.group();
-         //this.enemyPool = this.physics.add.group();
 
-    }
-
-    createBullet()
-    {
-        //Mirar si hay alguna bala reciclable en la pool
-        var _bullet = this.bulletPool.getFirst(false);
-        
-        if(!_bullet)
-        {//Que no? La creo
-            console.log('creando bala');
-            _bullet = new bulletPrefab(this,this._player.x,this._player.y,'bullet');
-            this.bulletPool.add(_bullet);
-        }else
-        {//Que si? La reciclo
-            console.log('reciclando bala');
-            _bullet.body.reset(this._player.x,this._player.y);
-            _bullet.active = true;
-        }
-        //Hago cosas con la bala
-        //Dar velocidad
-        _bullet.body.setVelocityX(gamePrefs.BULLET_SPEED);
-        //Ejecuta sonido
-        //this.shoot.play();
     }
 
     loadAnimations()
@@ -163,44 +121,24 @@ class nivel1 extends Phaser.Scene
             });
     }
 
-    update()
-    { 
-        //CHECK ON GROUND PLAYER
-        const onGround = this._player.body.onFloor() || this._player.body.touching.down;
-        
-        //////PLAYER MOVEMENT
-        if(this.cursores.left.isDown)
-        {
-            this._player.body.velocity.x = -gamePrefs.PLAYER_SPEED;
-            //console.log('Moving left');
-            //_player.anims.play('left',true);
-        }else
-        if(this.cursores.right.isDown)
-        {
-            this._player.body.velocity.x = gamePrefs.PLAYER_SPEED;
-            //console.log('Moving right');
-            //_player.anims.play('right',true);
-        }else
-        {
-            this._player.body.velocity.x = 0;
-            //_player.anims.play('idle',true);
-        } 
+    loadAnimationsFlyer()
+    {
+        this.anims.create(
+            {
+                key: 'walkFlyer',
+                frames:this.anims.generateFrameNumbers('flyer', {start:0, end: 2}),
+                frameRate: 10,
+                repeat: -1
+            }
+        );
 
-        
-        if (this.spaceKey.isDown && onGround) {
-            this._player.body.velocity.y -= gamePrefs.PLAYER_JUMP;
-        }
-
-        if (this.shiftKey.isDown) //&& !this.dashing
-        {
-            //this.dashing = true;
-            //this._player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
-            //_player.anims.play('dash',true);
-            
-            //to set the dash back to false
-            //this.time.delayedCall(200, () => {
-            //    this.dashing = false;
-            //});
-        }  
+        this.anims.create(
+            {
+                key: 'attackFlyer',
+                frames:this.anims.generateFrameNumbers('flyer', {start:3, end: 8}),
+                frameRate: 10,
+                repeat: -1
+            }
+        );
     }
 }

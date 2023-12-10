@@ -7,7 +7,9 @@ var gamePrefs=
     STAGE_BG_WIDTH: 7689,
     STAGE_BG_HEIGHT:212,
     BULLET_SPEED:150,
-    ENEMY_SPEED: 60
+    ENEMY_SPEED: 60,
+    WALKER_SPEED: 60,
+    FLYER_SPEED: 60
 }
 
 var config = 
@@ -30,7 +32,8 @@ var config =
         default:'arcade',
         arcade:
         {
-            gravity:{y:0} //we will need to change this
+            gravity:{y:0}, //we will need to change this
+            debug: true 
         }
     }
 };

@@ -5,42 +5,29 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         super(_scene,_posX,_posY,_spriteTag);
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
-        this.anims.play(_spriteTag,true);
+        //this.anims.play(_spriteTag,true);
         this.scene = _scene;
         this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-        //this.setColliders();
+        this.setColliders();
     }
 
-//    setColliders()
-//    {
-//        this.scene.physics.add.overlap
-//        (
-//            this.scene.hero,
-//            this,
-//            this.scene.hero.hitHero,
-//            null,
-//            this.scene.hero
-//        );
-//
-//        this.scene.physics.add.collider
-//        (
-//            this,
-//            this.scene.walls
-//        );
-//    }
+   setColliders()
+   {
+       this.scene.physics.add.overlap
+       (
+           this.scene._player,
+           this,
+           this.scene._player.hitPlayer,
+           null,
+           this.scene._player,  
+       );
+   }
 
-    preUpdate(time,delta)
-    {        
-        this.anims.play('walk', true);
-        
-        if(this.body.position.x < this.leftPatrol || this.body.position.x > this.rightPatrol)
-        {
-            this.direccion *= -1;
-            this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-            this.flipX = !this.flipX;
-        }
-
-        super.preUpdate(time, delta);
-    }
+   die(){
+    //this.scene.cameras.main.shake(500,0.05);
+    this.scene.cameras.main.flash(250,255,0,0);  
+    console.log("morisionado")  
+   }
+   
 }
