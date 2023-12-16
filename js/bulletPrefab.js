@@ -7,26 +7,34 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
         this.scene = _scene;
-        //this.setColliders();
+        this.setColliders();
     }
 
     setColliders()
    {
-       this.scene.physics.add.overlap
+        this.scene.physics.add.overlap
        (
            this.scene.enemyWalk,
            this,
-           this.scene.enemyWalk.die(),
+           this.deActivate,
            null,
-           this.scene.enemyWalk 
-       );
+           this 
+       ); 
+
    }
 
     deActivate()
     {
         this.setActive(false);
-        this.x = -100;
+        this._posY = -100;
+        console.log("te hago caso") //NO ME ESTA HACIENDO CASO BRO
+        this.scene.enemyWalk.die();
+ 
 
+    }
+
+    destroyBullet(){
+        this.destroy();
     }
 
     preUpdate()

@@ -1,12 +1,12 @@
 var gamePrefs=
 {
     PLAYER_SPEED: 100,
-    PLAYER_JUMP: 170,
+    PLAYER_JUMP: 185,
     gameWidth:424,
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,
     STAGE_BG_HEIGHT:212,
-    BULLET_SPEED:150,
+    BULLET_SPEED:170,
     ENEMY_SPEED: 60,
     WALKER_SPEED: 60,
     FLYER_SPEED: 60
