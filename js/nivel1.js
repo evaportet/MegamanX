@@ -13,6 +13,9 @@ class nivel1 extends Phaser.Scene
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
+
+        this.load.setPath('assets/map');
+        this.load.tilemapTiledJSON('map1','map1.json');
     }
 
     create()
