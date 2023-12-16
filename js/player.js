@@ -10,6 +10,10 @@ class player extends Phaser.GameObjects.Sprite
         this.health = 5;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
     }
+    
+    create(){
+        //this.bulletPool = this.physics.add.group();
+    }  
 
     hitPlayer(_player,_enemy)
     {
@@ -51,6 +55,7 @@ class player extends Phaser.GameObjects.Sprite
             _bullet.setFlipX(false);
         }
     }
+     
 
     preUpdate(time,delta)
     {
