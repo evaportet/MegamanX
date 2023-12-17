@@ -12,7 +12,7 @@ class player extends Phaser.GameObjects.Sprite
     }
     
     create(){
-        //this.bulletPool = this.physics.add.group();
+        this.bulletPool = this.physics.add.group();
     }  
 
     hitPlayer(_player,_enemy)

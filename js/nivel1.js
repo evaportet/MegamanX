@@ -59,6 +59,9 @@ class nivel1 extends Phaser.Scene
         this.loadAnimationsWalker();
         this.loadAnimationsFlyer();
 
+        ///// COLLISIONS
+        this.setColliders();
+
         //CAMERA
         this.cameras.main.startFollow(this._player);
         this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
@@ -69,6 +72,36 @@ class nivel1 extends Phaser.Scene
     {
         this.bulletPool = this.physics.add.group();
 
+    }
+
+    setColliders(){
+
+        this.physics.add.overlap
+        (
+            this.bulletPool,
+            this.enemyWalk,
+            this.killWalker,
+            null,
+            this
+        );
+
+        this.physics.add.overlap
+        (
+            this.bulletPool,
+            this.flyerWalk,
+            this.killFly,
+            null,
+            this
+        );
+    }
+
+    killWalker(){
+        this.enemyWalk.die();
+        this.bulletPool.active = false;
+    }
+
+    killFly(){
+        this.flyerWalk.die();
     }
 
     loadAnimations()
