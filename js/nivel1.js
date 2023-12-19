@@ -17,7 +17,8 @@ class nivel1 extends Phaser.Scene
 
         ////// MAP
         this.load.setPath('assets/map');
-        this.load.tilemapTiledJSON('level1','map1.json');
+        this.load.tilemapTiledJSON('level1','level1.json');
+
     }
 
     create()
@@ -27,16 +28,16 @@ class nivel1 extends Phaser.Scene
         
         //////MAP
         //Cargo el JSON
-        this.map = this.add.tilemap('map1');
+        this.map = this.add.tilemap('level1');
         //Cargo los tilesets
-        this.map.addTilesetImage('walls_tileset');
+        //this.map.addTilesetImage('walls_tileset');
         //this.map.addTilesetImage('moss_tileset');
         //Pinto las CAPAS/LAYERS
-        this.walls = this.map.createLayer(' ','walls_tileset');
-        /* this.map.createLayer('layer_moss_up','moss_tileset');
-        this.map.createLayer('layer_moss_left','moss_tileset');
-        this.map.createLayer('layer_moss_right','moss_tileset');
-        this.map.createLayer('layer_moss_bottom','moss_tileset'); */
+        //this.walls = this.map.createLayer('layer_walls','walls_tileset');
+        this.map.createLayer('layer_back','Back');
+        this.map.createLayer('layer_collisions','Collision');
+        this.map.createLayer('layer_moving_platforms','MovingPlatforms');
+        this.map.createLayer('layer_front','Front');
 
         //Defino con qué se colisiona en la layer_walls
         this.map.setCollisionBetween(1,11,true,true,'layer_walls');
