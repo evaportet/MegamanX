@@ -95,9 +95,20 @@ class nivel1 extends Phaser.Scene
         );
     }
 
-    killWalker(){
-        this.enemyWalk.die();
-        this.bulletPool.active = false;
+    killWalker(_bullet, _enemy){
+
+        _bullet.deActivate();
+        
+        _enemy.health--;
+        if(_enemy.health>0)
+        {
+            //invulnerabilidad durante X segundos
+        }else if(_enemy.health==0)
+        {
+            _enemy.die();            
+            this.score +=100;
+            this.scoreText.text=this.score;
+        }
     }
 
     killFly(){

@@ -9,7 +9,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         this.scene = _scene;
         this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-        this.setColliders();
+        //this.setColliders();
         this.health = 7;
     }
 
@@ -24,18 +24,28 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
            this.scene._player,  
        );
 
-        this.scene.physics.add.overlap
+         this.scene.physics.add.overlap
        (
            this.scene.bulletPool,
            this,
            this.die,
            null,
            this,  
-       ); 
+       );  
+       
+       /* this.scene.physics.add.overlap
+       (
+           this.scene.bulletPool,
+           this,
+           this.die,
+           null,
+           this,  
+       );  */
    }
 
    die(){ 
 
+    //this.scene.bulletPool.active = false;
     if(this.health == 0){
         this.destroy();
         this.health =7;}
