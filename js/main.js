@@ -17,7 +17,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene:[nivel1, firstBossScene], //array con las escenas
+    scene:[ firstBossScene, nivel1], //array con las escenas
     render:
     {
         pixelArt:true

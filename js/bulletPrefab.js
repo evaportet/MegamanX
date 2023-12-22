@@ -14,9 +14,9 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
     {
         this.scene.physics.add.overlap
         (
-            this.scene._enemy,
+            this.scene.firstBoss,
             this,
-            this.deActivate,
+            this.deActivate(),
             null,
             this,  
         );
@@ -24,7 +24,7 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
 
     deActivate()
     {
-        this._posY = -100;
+        this.body.y = -100;
         this.setActive(false);
         console.log("te hago caso") //NO ME ESTA HACIENDO CASO BRO
   

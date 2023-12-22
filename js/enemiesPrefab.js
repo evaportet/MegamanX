@@ -9,7 +9,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         this.scene = _scene;
         this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-        //this.setColliders();
+        this.setColliders();
         this.health = 7;
     }
 
@@ -22,37 +22,31 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
            this.scene._player.hitPlayer,
            null,
            this.scene._player,  
-       );
-
-         this.scene.physics.add.overlap
-       (
-           this.scene.bulletPool,
-           this,
-           this.die,
-           null,
-           this,  
-       );  
+       ); 
        
-       /* this.scene.physics.add.overlap
+        this.scene.physics.add.overlap
        (
            this.scene.bulletPool,
            this,
            this.die,
            null,
-           this,  
-       );  */
+           this.scene  
+       );  
    }
 
-   die(){ 
-
-    //this.scene.bulletPool.active = false;
-    if(this.health == 0){
-        this.destroy();
-        this.health =7;}
+   die(_enemy, _bullet){ 
+ 
+    //this.scene._bullet.deActivate();
+    _bullet.deActivate();
+    if(--_enemy.health == 0){
+        _enemy.destroy();
+        console.log("no morido") 
+        _enemy.health =7;
+    }
     else
     {
-        this.health--;
-        console.log(this.health);   
+        //_enemy.health--;
+        console.log(_enemy.health);   
     }
         console.log("morisionado") 
        //  this.scene.bulletPool.deActivate; no quiere hacer caso

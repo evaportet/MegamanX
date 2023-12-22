@@ -8,13 +8,14 @@ class firstBoss extends enemiesPrefab{
         this.isAttacking = false;
         this.health = 7;
         //this._scene = scene;
-
+       // console.log(this.leftPatrol)
         this.body.setVelocityX(0);
         
     }
+    
 
 
-    bulletDamage(boss, bullet){
+    bulletDamage(){
 
         if(this.health == 0){
             this.body.reset( gamePrefs.gameWidth/1.2, gamePrefs.gameHeight*.823);
@@ -27,6 +28,20 @@ class firstBoss extends enemiesPrefab{
     }
 
     preUpdate(time, delta){
+
+        if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
+        {
+            this.direccion *= -1;
+            this.body.setVelocityX(gamePrefs.WALKER_SPEED * this.direccion);
+            this.flipX = !this.flipX;
+            //console.log('fueraaaaaa')
+        }
+        else if(this.body.position.x > this.leftPatrol && this.body.position.x < this.rightPatrol){
+            this.body.setVelocityX(gamePrefs.WALKER_SPEED * this.direccion);
+            //console.log('dentroooo')
+        }
+        //console.log(this.body.x)
+
         super.preUpdate(time, delta);
     }
 }

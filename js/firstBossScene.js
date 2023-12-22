@@ -17,17 +17,35 @@ class firstBossScene extends Phaser.Scene
         this.load.image('firstBoss', 'firstBoss.png');
 
         this.bulletPool = this.physics.add.group();
-    
-    }
 
+       
+    }
     create(){
         this.bg = this.add.tileSprite(-7000,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT,'back').setOrigin(0);
         
         this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
         
         this.firstBoss = new firstBoss(this, gamePrefs.gameWidth/1.2, gamePrefs.gameHeight*.823, 'firstBoss');
-       
- 
+        
+        
+        //CAMERA
+        //this.cameras.main.startFollow(this._player);
+        // this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH,0);
+        
+        this.setColliders();
+    
     }
+
+    setColliders(){
+        this.physics.add.overlap
+        (
+            this.bulletPool,
+            this.firstBoss,
+            this.firstBoss.bulletDamage, 
+            null,
+            this.firstBoss,  
+        );    
+    }
+
 
 }

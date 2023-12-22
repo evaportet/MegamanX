@@ -9,10 +9,20 @@ class player extends Phaser.GameObjects.Sprite
         this.body.setGravityY(300);
         this.health = 5;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+                //DISPARO
+                this.cursors.space.on
+                (
+                    'up',
+                    function()
+                    {
+                        this.createBullet();
+                    },
+                    this
+                );
     }
     
     create(){
-        this.bulletPool = this.physics.add.group();
+
     }  
 
     hitPlayer(_player,_enemy)
@@ -85,17 +95,9 @@ class player extends Phaser.GameObjects.Sprite
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
-        //DISPARO
-        this.cursors.space.on
-        (
-            'down',
-            function()
-            {
-                this.createBullet();
-            },
-            this
-        );
         
+        //console.log(this.body.x)
+
         super.preUpdate(time,delta);
 
         // if (this.shiftKey.isDown) //&& !this.dashing
