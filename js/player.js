@@ -5,7 +5,7 @@ class player extends Phaser.GameObjects.Sprite
         super(_scene,_posX,_posY,_spriteTag);
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
-        this.body.collideWorldBounds = true; // a ver las fisicas... 
+        //this.body.collideWorldBounds = true; // a ver las fisicas... 
         this.health = 5;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
     }

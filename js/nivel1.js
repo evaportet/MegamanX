@@ -15,12 +15,12 @@ class nivel1 extends Phaser.Scene
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
 
         ////// MAP
-        //this.load.setPath('assets/map');
-        //this.load.tilemapTiledJSON('level1','level1.json');
+        //img
         this.load.setPath('assets/img');
         this.load.image('backG', 'background_loop.png');
         this.load.image('tiles', 'background_stage.png');
 
+        //map
         this.load.setPath('assets/map');
         this.load.tilemapTiledJSON('level1', 'level1.json');
         
@@ -29,61 +29,40 @@ class nivel1 extends Phaser.Scene
     create()
     { 
         //////BACKGROUND
-        this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
+            this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
         
         //////MAP
-        /*
-        //Cargo el JSON
-        this.map = this.add.tilemap('level1');
-        //Cargo los tilesets
-        this.map.addTilesetImage('tiles');
-        //this.map.addTilesetImage('moss_tileset');
-        //Pinto las CAPAS/LAYERS
-        this.walls = this.map.createLayer('Collision','tiles');
-        this.map.createLayer('Back','tiles');
-        //this.map.createLayer('Collision','tiles');
-        this.map.createLayer('MovingPlatforms','tiles');
-        this.map.createLayer('Front','tiles');
-        */
+            this.map = this.add.tilemap('level1');
+            this.map.addTilesetImage('myTile', 'tiles');
 
-        // Map
-        //this.map = this.make.tilemap({ key: 'level1' });
-        this.map = this.add.tilemap('level1');
-        this.map.addTilesetImage('myTile', 'tiles');
+            // Layers
+            this.map.createLayer('Back', 'tiles', 0, 0);
+            this.walls = this.map.createLayer('Collision', 'tiles', 0,0);
+            this.map.createLayer('MovingPlatforms', 'tiles', 0, 0);
+            this.map.createLayer('Front', 'tiles', 0, 0);
 
-        // Layers
-        this.walls = this.map.createLayer('Collision', 'tiles');
-        this.map.createLayer('Back', 'tiles');
-        this.map.createLayer('MovingPlatforms', 'tiles');
-        this.map.createLayer('Front', 'tiles');
-
-        // Set collisions
-        this.map.setCollisionByExclusion([-1], true, true, this.walls);
-
-        //Defino con qué se colisiona en la layer_walls
-        //this.map.setCollisionBetween(1,11,true,true,'layer_walls');
-        //Ponemos -1, ya que phaser lo interpreta como un 0 en el json 
-        //this.map.setCollisionByExclusion(-1,true,true,'Collision'); 
+            // Set collisions
+            this.map.setCollisionByExclusion([-1], true, true, this.walls);
 
         //////PLAYER
-        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
+            this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
 
         ////// ENEMY WALK
-        this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
+            this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
 
         ////// ENEMY FLY
-        this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
+            this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
 
         //LOAD POOLS
-        this.loadPools();
+            this.loadPools();
 
         //////ANIMATION
-        this.loadAnimationsWalker();
-        this.loadAnimationsFlyer();
+            this.loadAnimationsWalker();
+            this.loadAnimationsFlyer();
 
         //CAMERA
-        this.cameras.main.startFollow(this._player);
-        this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
+            this.cameras.main.startFollow(this._player);
+            this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
         
     }
 
