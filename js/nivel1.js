@@ -9,16 +9,21 @@ class nivel1 extends Phaser.Scene
     { 
         ////// PLAYER ASSETS
         this.load.setPath('assets/img');
-        this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
 
         ////// MAP
-        this.load.setPath('assets/map');
-        this.load.tilemapTiledJSON('level1','level1.json');
+        //this.load.setPath('assets/map');
+        //this.load.tilemapTiledJSON('level1','level1.json');
+        this.load.setPath('assets/img');
+        this.load.image('backG', 'background_loop.png');
+        this.load.image('tiles', 'background_stage.png');
 
+        this.load.setPath('assets/map');
+        this.load.tilemapTiledJSON('level1', 'level1.json');
+        
     }
 
     create()
@@ -27,22 +32,38 @@ class nivel1 extends Phaser.Scene
         this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
         
         //////MAP
+        /*
         //Cargo el JSON
         this.map = this.add.tilemap('level1');
         //Cargo los tilesets
-        //this.map.addTilesetImage('walls_tileset');
+        this.map.addTilesetImage('tiles');
         //this.map.addTilesetImage('moss_tileset');
         //Pinto las CAPAS/LAYERS
-        //this.walls = this.map.createLayer('layer_walls','walls_tileset');
-        this.map.createLayer('layer_back','Back');
-        this.map.createLayer('layer_collisions','Collision');
-        this.map.createLayer('layer_moving_platforms','MovingPlatforms');
-        this.map.createLayer('layer_front','Front');
+        this.walls = this.map.createLayer('Collision','tiles');
+        this.map.createLayer('Back','tiles');
+        //this.map.createLayer('Collision','tiles');
+        this.map.createLayer('MovingPlatforms','tiles');
+        this.map.createLayer('Front','tiles');
+        */
+
+        // Map
+        //this.map = this.make.tilemap({ key: 'level1' });
+        this.map = this.add.tilemap('level1');
+        this.map.addTilesetImage('myTile', 'tiles');
+
+        // Layers
+        this.walls = this.map.createLayer('Collision', 'tiles');
+        this.map.createLayer('Back', 'tiles');
+        this.map.createLayer('MovingPlatforms', 'tiles');
+        this.map.createLayer('Front', 'tiles');
+
+        // Set collisions
+        this.map.setCollisionByExclusion([-1], true, true, this.walls);
 
         //Defino con qué se colisiona en la layer_walls
-        this.map.setCollisionBetween(1,11,true,true,'layer_walls');
+        //this.map.setCollisionBetween(1,11,true,true,'layer_walls');
         //Ponemos -1, ya que phaser lo interpreta como un 0 en el json 
-        this.map.setCollisionByExclusion(-1,true,true,'layer_walls'); 
+        //this.map.setCollisionByExclusion(-1,true,true,'Collision'); 
 
         //////PLAYER
         this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
