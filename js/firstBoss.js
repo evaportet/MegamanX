@@ -9,56 +9,57 @@ class firstBoss extends enemiesPrefab{
         this.health = 7;
         //this._scene = scene;
        // console.log(this.leftPatrol)
+       this.body.collideWorldBounds = true; 
+       this.body.setGravityY(50);
         this.flipX = true;
 
         this.onDash = false;
+        this.onJump = false;
         
     }
     
     create(){
 
-        this.dashTimer = this.time.addEvent
-        (
-            {
-                delay: 2000, //ms
-                callback: this.dash,
-                callbackScope:this,
-                loop:true //repeat: -1
-            }
-        );
+
     }
 
     preUpdate(time, delta){
 
-
+        //Patrol
         if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
         {
             this.direccion *= -1;
-            this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
             this.flipX = !this.flipX;
-           // this.dash();
         }
-        else if(this.body.position.x > this.leftPatrol && this.body.position.x < this.rightPatrol){
-            //this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
-            //console.log('dentroooo')
-        }
-        //console.log(this.body.x)
 
-        super.preUpdate(time, delta);
-    }
-
-
-    /*this.boss_shootingTimer = this.time.addEvent({delay: 3000, callback: createBulletBrust(), callbackScope: this, repeat: -1});*/
-        
-    dash(){
-
-        if(this.flipX == true){
+        //Movement
+        if(this.onDash){
             console.log("daaaash");
             this.body.setVelocityX(100 * this.direccion);
         }
         else{
             this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
+        }
+
+        if(this.onJump && this.body.onFloor()){
+
+            this.body.setVelocityY(-gamePrefs.ENEMY_JUMP);
+            this.onJump = false;
+        }
+        else{
 
         }
+
+        super.preUpdate(time, delta);
+    }
+        
+    dash(){
+
+        this.onDash = !this.onDash;
+    }
+    
+    jump(){
+        this.onJump = !this.onJump;
+        console.log("entrando en timer");
     }
 }

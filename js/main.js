@@ -8,6 +8,7 @@ var gamePrefs=
     STAGE_BG_HEIGHT:212,
     BULLET_SPEED:170,
     ENEMY_SPEED: 60,
+    ENEMY_JUMP: 50,
     WALKER_SPEED: 60,
     FLYER_SPEED: 60
 }

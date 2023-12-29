@@ -28,7 +28,25 @@ class firstBossScene extends Phaser.Scene
         
         this.firstBoss = new firstBoss(this, gamePrefs.gameWidth/1.2, gamePrefs.gameHeight*.823,20, 360, 'firstBoss');
         
-    
+        /* this.bossDashTimer = this.time.addEvent
+        (
+            {
+                delay: 2000, //ms
+                callback: this.firstBoss.dash,
+                callbackScope:this.firstBoss,
+                loop:true //repeat: -1
+            }
+        ); */
+
+        this.bossJumpTimer = this.time.addEvent
+        (
+            {
+                delay: 5000, //ms
+                callback: this.firstBoss.jump,
+                callbackScope:this.firstBoss,
+                loop:true //repeat: -1
+            }
+        );
     }
 
 }
