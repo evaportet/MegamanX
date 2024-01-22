@@ -33,16 +33,21 @@ class nivel1 extends Phaser.Scene
         
         //////MAP
             this.map = this.add.tilemap('level1');
-            this.map.addTilesetImage('myTile', 'tiles');
+            this.map.addTilesetImage('tiles');
 
             // Layers
-            this.map.createLayer('Back', 'tiles', 0, 0);
-            this.walls = this.map.createLayer('Collision', 'tiles', 0,0);
-            this.map.createLayer('MovingPlatforms', 'tiles', 0, 0);
-            this.map.createLayer('Front', 'tiles', 0, 0);
+            this.back = this.map.createLayer('Back', 'tiles');
+            this.collision = this.map.createLayer('Collision', 'tiles');
+            this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tiles');
+            this.front = this.map.createLayer('Front', 'tiles');
+
+            //this.map.createLayer('Back', 'tiles');
+            //this.walls = this.map.createLayer('Collision', 'tiles');
+            //this.map.createLayer('MovingPlatforms', 'tiles');
+            //this.map.createLayer('Front', 'tiles');
 
             // Set collisions
-            this.map.setCollisionByExclusion([-1], true, true, this.walls);
+            //this.map.setCollisionByExclusion([-1], true, true, this.walls);
 
         //////PLAYER
             this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
