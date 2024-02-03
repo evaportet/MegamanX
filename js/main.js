@@ -1,7 +1,7 @@
 var gamePrefs=
 {
-    PLAYER_SPEED: 100,
-    PLAYER_JUMP: 185,
+    PLAYER_SPEED: 150,
+    PLAYER_JUMP: 400,
     gameWidth:424,
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,
@@ -32,7 +32,7 @@ var config =
         default:'arcade',
         arcade:
         {
-            gravity:{y:100}, //we will need to change this
+            gravity:{y:900}, //we will need to change this
             debug: true 
         }
     }

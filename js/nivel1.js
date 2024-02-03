@@ -31,23 +31,23 @@ class nivel1 extends Phaser.Scene
         //////BACKGROUND
             this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
             this.bg = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'estesi').setOrigin(0);
-
-
-        //////MAP
+            
+            
+            //////MAP
             this.map = this.add.tilemap('tileset');
             this.tilset = this.map.addTilesetImage('estesi');
-
+            
             // Layers
-           // this.back = this.map.createLayer('Back', 'tileset');
+            // this.back = this.map.createLayer('Back', 'tileset');
             this.collision = this.map.createLayer('collision', 'estesi');
-           // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
-           // this.front = this.map.createLayer('Front', 'tileset');
-
+            // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
+            // this.front = this.map.createLayer('Front', 'tileset');
+            
             //this.map.createLayer('Back', 'tiles');
             //this.walls = this.map.createLayer('Collision', 'tiles');
             //this.map.createLayer('MovingPlatforms', 'tiles');
             //this.map.createLayer('Front', 'tiles');
-
+            
             
             //////PLAYER
             this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/3,'player');   
@@ -55,10 +55,10 @@ class nivel1 extends Phaser.Scene
             this.map.setCollisionByExclusion(-1, true, true, 'collision');
 
         ////// ENEMY WALK
-            this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
+            this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);
 
         ////// ENEMY FLY
-            //this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
+            this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
 
         //LOAD POOLS
             this.loadPools();

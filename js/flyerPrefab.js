@@ -6,12 +6,16 @@ class flyerPrefab extends enemiesPrefab
         this.leftPatrol = _leftPatrol;
         this.rightPatrol = _rightPatrol;
         console.log('zzzzzz')
+        //this.body.setAllowGravity(false);
         this.isAttacking = false;
     }
 
     preUpdate(time,delta)
     {        
         this.anims.play('walkFlyer', true);
+
+        
+        this.body.allowGravity = false;
         
         if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
         {
@@ -24,6 +28,7 @@ class flyerPrefab extends enemiesPrefab
            // console.log('dentroooo')
         }
         super.preUpdate(time, delta);
+
     }
 
     attack()

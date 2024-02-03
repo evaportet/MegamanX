@@ -23,7 +23,7 @@ class player extends Phaser.GameObjects.Sprite
     hitPlayer(_player,_enemy)
     {
         if(this.health == 0){
-             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95);
+             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
              this.health =5;
         }
         else
