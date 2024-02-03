@@ -17,6 +17,6 @@
 </data>
  </layer>
  <imagelayer id="3" name="back" visible="0">
-  <image source="../img/background_stage.png" width="7689" height="848"/>
+  <image source="../img/background_stage.png" width="7680" height="352"/>
  </imagelayer>
 </map>

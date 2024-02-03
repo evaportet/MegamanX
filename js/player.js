@@ -7,7 +7,17 @@ class player extends Phaser.GameObjects.Sprite
         _scene.physics.world.enable(this);
         //this.body.collideWorldBounds = true; // a ver las fisicas... 
         this.health = 5;
+        this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+    }
+
+    setColliders()
+    {
+        this.scene.physics.add.collider
+        (
+            this,
+            this.scene.collision
+        );        
     }
 
     hitPlayer(_player,_enemy)

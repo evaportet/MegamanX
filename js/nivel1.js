@@ -18,11 +18,11 @@ class nivel1 extends Phaser.Scene
         //img
         this.load.setPath('assets/img');
         this.load.image('backG', 'background_loop.png');
-        this.load.image('tiles', 'background_stage.png');
+        this.load.image('estesi', 'background_stage.png');
 
         //map
         this.load.setPath('assets/map');
-        this.load.tilemapTiledJSON('tileset', 'tileset.json');
+        this.load.tilemapTiledJSON('tileset', 'ddefinitivo.json');
         
     }
 
@@ -30,14 +30,16 @@ class nivel1 extends Phaser.Scene
     { 
         //////BACKGROUND
             this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
-        
+            this.bg = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'estesi').setOrigin(0);
+
+
         //////MAP
             this.map = this.add.tilemap('tileset');
-           // this.map.addTilesetImage('back');
+            this.tilset = this.map.addTilesetImage('estesi');
 
             // Layers
            // this.back = this.map.createLayer('Back', 'tileset');
-            this.collision = this.map.createLayer('collision', 'back');
+            this.collision = this.map.createLayer('collision', 'estesi');
            // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
            // this.front = this.map.createLayer('Front', 'tileset');
 
@@ -46,17 +48,17 @@ class nivel1 extends Phaser.Scene
             //this.map.createLayer('MovingPlatforms', 'tiles');
             //this.map.createLayer('Front', 'tiles');
 
+            
+            //////PLAYER
+            this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/3,'player');   
             // Set collisions
-            //this.map.setCollisionByExclusion([-1], true, true, this.walls);
-
-        //////PLAYER
-            this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
+            this.map.setCollisionByExclusion(-1, true, true, 'collision');
 
         ////// ENEMY WALK
             this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
 
         ////// ENEMY FLY
-            this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
+            //this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
 
         //LOAD POOLS
             this.loadPools();
@@ -67,7 +69,7 @@ class nivel1 extends Phaser.Scene
 
         //CAMERA
             this.cameras.main.startFollow(this._player);
-            this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
+            this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH,  gamePrefs.STAGE_BG_HEIGHT);
         
     }
 

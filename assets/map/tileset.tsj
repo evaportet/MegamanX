@@ -1,0 +1,15 @@
+{ "columns":240,
+ "image":"..\/img\/background_stage.png",
+ "imageheight":848,
+ "imagewidth":7689,
+ "margin":0,
+ "name":"tileset",
+ "spacing":0,
+ "tilecount":6240,
+ "tiledversion":"1.10.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#0cff28",
+ "type":"tileset",
+ "version":"1.10"
+}
