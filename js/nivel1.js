@@ -22,7 +22,7 @@ class nivel1 extends Phaser.Scene
 
         //map
         this.load.setPath('assets/map');
-        this.load.tilemapTiledJSON('level1', 'level1.json');
+        this.load.tilemapTiledJSON('tileset', 'tileset.json');
         
     }
 
@@ -32,14 +32,14 @@ class nivel1 extends Phaser.Scene
             this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
         
         //////MAP
-            this.map = this.add.tilemap('level1');
-            this.map.addTilesetImage('tiles');
+            this.map = this.add.tilemap('tileset');
+           // this.map.addTilesetImage('back');
 
             // Layers
-            this.back = this.map.createLayer('Back', 'tiles');
-            this.collision = this.map.createLayer('Collision', 'tiles');
-            this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tiles');
-            this.front = this.map.createLayer('Front', 'tiles');
+           // this.back = this.map.createLayer('Back', 'tileset');
+            this.collision = this.map.createLayer('collision', 'back');
+           // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
+           // this.front = this.map.createLayer('Front', 'tileset');
 
             //this.map.createLayer('Back', 'tiles');
             //this.walls = this.map.createLayer('Collision', 'tiles');
