@@ -7,14 +7,21 @@ class nivel1 extends Phaser.Scene
     
     preload()
     { 
-        ////// PLAYER ASSETS
+        ////// ASSETS
         this.load.setPath('assets/img');
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
         this.load.image('bomb', 'bomb.png');     
-        ////// MAP
+        
+        //UI
+        this.load.image('playerHP', 'player_health.png'); 
+            //font
+        this.load.setPath('assets/fonts/');
+        this.load.bitmapFont('font','titleFont.png','titleFont.xml');
+
+        //// MAP
         //img
         this.load.setPath('assets/img');
         this.load.image('backG', 'background_loop.png');
@@ -75,13 +82,14 @@ class nivel1 extends Phaser.Scene
             this.loadAnimationsWalker();
             this.loadAnimationsFlyer();
 
-        ///// COLLISIONS
-        this.setColliders();
-
         //CAMERA
             this.cameras.main.startFollow(this._player);
             this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH,  gamePrefs.STAGE_BG_HEIGHT);
         
+        //UI
+        this.add.sprite(30,25,'playerHP').setScrollFactor(0);
+        this.player_health = this._player.health ;
+        this.player_health_counter = this.add.bitmapText(65, 28, 'font', this.player_health ,20).setOrigin(0.5).setScrollFactor(0);
     }
 
     loadPools()
@@ -90,45 +98,8 @@ class nivel1 extends Phaser.Scene
         this.bombPool = this.physics.add.group();
     }
 
-    setColliders(){
-
-        this.physics.add.overlap
-        (
-            this.bulletPool,
-            this.enemyWalk,
-            this.killWalker,
-            null,
-            this
-        );
-
-        this.physics.add.overlap
-        (
-            this.bulletPool,
-            this.flyerWalk,
-            this.killFly,
-            null,
-            this
-        );
-    }
-
-    killWalker(_bullet, _enemy){
-
-        _bullet.deActivate();
-        
-        _enemy.health--;
-        if(_enemy.health>0)
-        {
-            //invulnerabilidad durante X segundos
-        }else if(_enemy.health==0)
-        {
-            _enemy.die();            
-            this.score +=100;
-            this.scoreText.text=this.score;
-        }
-    }
-
-    killFly(){
-        this.flyerWalk.die();
+    update(){
+        //console.log(this.player_health);
     }
 
     loadAnimations()

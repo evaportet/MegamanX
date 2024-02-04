@@ -11,7 +11,7 @@ class enemyBombPrefab extends Phaser.GameObjects.Sprite
     deActivate()
     {
         this.setActive(false);
-        this.y = -100;
+        this.y = 300;
     }
 
     preUpdate()

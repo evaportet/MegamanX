@@ -5,7 +5,7 @@ class player extends Phaser.GameObjects.Sprite
         super(_scene,_posX,_posY,_spriteTag);
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
-        this.health = 5;
+        this.health = 3;
         this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -30,21 +30,48 @@ class player extends Phaser.GameObjects.Sprite
         (
             this,
             this.scene.collision
-        );        
+        );   
+
+        this.scene.physics.add.overlap
+       (
+           this.scene.bombPool,
+           this,
+           this.hitBomb,
+           null,
+           this,  
+       );      
     }
 
     hitPlayer(_player,_enemy)
     {
         if(this.health == 0){
-             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
-             this.health =5;
+             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3); 
+             this.health =3;
         }
         else
         {
             this.health--;
+            this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
+            this.scene.player_health_counter.text = --this.scene.player_health;
             this.scene.cameras.main.flash(250,255,0,0);     
         }
     }
+    hitBomb(_player, _bomb){ 
+ 
+        //this.scene._bullet.deActivate();
+        _bomb.deActivate();
+        if(this.health == 0){
+            this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3); 
+            this.health =3;
+       }
+       else
+       {
+           this.health--;
+           this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
+           this.scene.player_health_counter.text = --this.scene.player_health;
+           this.scene.cameras.main.flash(250,255,0,0);     
+       }  
+       }
 
     createBullet()
     {
