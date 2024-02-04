@@ -9,12 +9,18 @@ class nivel1 extends Phaser.Scene
     { 
         ////// ASSETS
         this.load.setPath('assets/img');
-        this.load.image('player','playerIdle.png');
+
+        this.load.spritesheet('playerIdle', 'idleAnim.png', {frameWidth: 34, frameHeight: 41});
+        this.load.spritesheet('playerRun', 'run.png', {frameWidth: 28, frameHeight: 38});
+        this.load.spritesheet('playerJump', 'jump.png', {frameWidth: 29, frameHeight: 46});
+        
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
-        this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
+
+        this.load.image('bullet', 'bullet.png'); 
         this.load.image('bomb', 'bomb.png');    
         this.load.image('heart', 'heart.png'); 
+
         this.load.image('firstBoss', 'firstBoss.png');
         
         //UI
@@ -57,25 +63,27 @@ class nivel1 extends Phaser.Scene
             this.loadPools(); 
             this.loadSounds();
             //////PLAYER
-            this._player = new player(this,110,gamePrefs.gameHeight/2 -20,'player');   
+            this._player = new player(this,110,gamePrefs.gameHeight/2 -20,'playerIdle');   
             // Set collisions
             this.map.setCollisionByExclusion(-1, true, true, 'collision');
             
             ////// ENEMY WALK
-            this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);            
+            this.enemyWalk = new walkerPrefab(this, 550, 70, 400, 700);
+            this.enemyWalk1 = new walkerPrefab(this, 1500, 70, 1400, 1800);       
 
-        ////// ENEMY FLY
-            this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
+            ////// ENEMY FLY
+            this.flyerWalk = new flyerPrefab(this, 1000, 20, 850, 1300); 
+            this.flyerWalk1 = new flyerPrefab(this, 1800, 20, 1700, 1900);     
             this.bombTimer = this.flyerWalk.enemyTimer;
             this.enemyTimer = this.time.addEvent
-        (
-            {
-                delay: 2000, //ms
-                callback: this.flyerWalk.createBomb,
-                callbackScope:this.flyerWalk,
-                loop:true //repeat: -1
-            }
-        );
+            (
+                {
+                    delay: 2000, //ms
+                    callback: this.flyerWalk.createBomb,
+                    callbackScope:this.flyerWalk,
+                    loop:true //repeat: -1
+                }
+            );
 
 
         //////// BOSSS
@@ -104,6 +112,7 @@ class nivel1 extends Phaser.Scene
         //////ANIMATION
             this.loadAnimationsWalker();
             this.loadAnimationsFlyer();
+            this.loadAnimations();
 
         //CAMERA
             this.cameras.main.startFollow(this._player);
@@ -147,44 +156,28 @@ class nivel1 extends Phaser.Scene
     loadAnimations()
     {
         this.anims.create(
-        {
-            key: 'idle',
-            frames:this.anims.generateFrameNumbers('player', {start:0, end: 1}),
-            frameRate: 10,
-            repeat: -1
-        });
-                
-        this.anims.create(
-        {
-            key: 'run_left',
-            frames:this.anims.generateFrameNumbers('player', {start:2, end: 3}),
-            frameRate: 10,
-            repeat: -1
-        });
-        
-        this.anims.create(
             {
-            key: 'run_right',
-            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create(
-        {
-            key: 'jump',
-            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create(
-        {
-            key: 'dash',
-            frames:this.anims.generateFrameNumbers('player', {start:4, end: 5}),
-            frameRate: 10,
-            repeat: -1
-        }); 
+                key: 'idleAnim',
+                frames:this.anims.generateFrameNumbers('playerIdle', {start:0, end: 2}),
+                frameRate: 10,
+                repeat: -1
+            });
+    
+            this.anims.create(
+            {
+                key: 'run',
+                frames:this.anims.generateFrameNumbers('playerRun', {start:0, end: 10}),
+                frameRate: 10,
+                repeat: -1
+            });
+    
+            this.anims.create(
+                {
+                    key: 'jump',
+                    frames:this.anims.generateFrameNumbers('playerJump', {start:0, end: 8}),
+                    frameRate: 10,
+                    repeat: -1
+                });
     };   
 
     loadAnimationsWalker()

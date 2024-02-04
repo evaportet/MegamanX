@@ -6,6 +6,7 @@ class player extends Phaser.GameObjects.Sprite
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
         this.health = 3;
+        this.anims.play('idleAnim');
         this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
@@ -111,24 +112,29 @@ class player extends Phaser.GameObjects.Sprite
             this.active = false;
         }
 
-        //MOVIMIENTO
+        // MOVIMIENTO
         if(this.cursors.left.isDown)
         { 
+            this.anims.play('run', true);
             this.body.setVelocityX(-gamePrefs.PLAYER_SPEED);
-            this.setFlipX(true);    
+            this.setFlipX(true);
         }
         else if(this.cursors.right.isDown)
         {
+            this.anims.play('run', true);
             this.body.setVelocityX(gamePrefs.PLAYER_SPEED);
             this.setFlipX(false);
-        }else
+        } 
+        else
         { 
+            this.anims.play('idleAnim', true);
             this.body.setVelocityX(0);
-        }    
+        }
         
         //SALTO
         if(this.cursors.up.isDown && this.body.onFloor() && Phaser.Input.Keyboard.DownDuration(this.cursors.up,250))
         {
+            this.anims.play('jump', true);
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
