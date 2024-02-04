@@ -7,19 +7,6 @@ class bulletPrefab extends Phaser.GameObjects.Sprite
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
         this.scene = _scene;
-        //this.setColliders();
-    }
-
-    setColliders()
-    {
-        this.scene.physics.add.overlap
-        (
-            this.scene.firstBoss,
-            this,
-            this.deActivate(),
-            null,
-            this,  
-        );
     }
 
     deActivate()

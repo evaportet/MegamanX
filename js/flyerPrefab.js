@@ -12,6 +12,7 @@ class flyerPrefab extends enemiesPrefab
     preUpdate(time,delta)
     {        
         this.anims.play('walkFlyer', true);
+        this.body.allowGravity = false; 
         
         if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
         {

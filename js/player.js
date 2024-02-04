@@ -9,6 +9,20 @@ class player extends Phaser.GameObjects.Sprite
         this.health = 5;
         this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+
+        //DISPARO
+        this.cursors.space.on
+        (
+            'up',
+            function()
+            {
+                this.createBullet();
+            },
+            this
+        );
+        
+
+
     }
 
     setColliders()
@@ -89,16 +103,6 @@ class player extends Phaser.GameObjects.Sprite
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
-        //DISPARO
-        this.cursors.space.on
-        (
-            'up',
-            function()
-            {
-                this.createBullet();
-            },
-            this
-        );
         
         super.preUpdate(time,delta);
         /*

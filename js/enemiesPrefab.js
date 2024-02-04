@@ -32,6 +32,12 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
            null,
            this.scene  
        );  
+
+       this.scene.physics.add.collider
+        (
+            this,
+            this.scene.collision
+        ); 
    }
 
    die(_enemy, _bullet){ 

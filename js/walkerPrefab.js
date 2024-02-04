@@ -11,7 +11,7 @@ class walkerPrefab extends enemiesPrefab
     preUpdate(time,delta)
     {        
         this.anims.play('walk', true);
-        
+       
         if(this.body.position.x <= this.leftPatrol || this.body.position.x >= this.rightPatrol)
         {
             this.direccion *= -1;

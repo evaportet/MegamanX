@@ -48,20 +48,20 @@ class nivel1 extends Phaser.Scene
             //this.map.createLayer('MovingPlatforms', 'tiles');
             //this.map.createLayer('Front', 'tiles');
             
-            
+            //LOAD POOLS
+            this.loadPools(); 
             //////PLAYER
             this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/3,'player');   
             // Set collisions
             this.map.setCollisionByExclusion(-1, true, true, 'collision');
 
         ////// ENEMY WALK
-          //  this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);
+            this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);
 
         ////// ENEMY FLY
-          //  this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
+            this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
 
-        //LOAD POOLS
-            this.loadPools();
+        
 
         //////ANIMATION
             this.loadAnimationsWalker();
