@@ -6,8 +6,9 @@ class firstBossScene extends Phaser.Scene
         super({key: 'firstBossScene'});
         
         //var clock = new Clock({scene: this, secs: 60});
+        
     }
-
+    
     preload(){
         //Cargar assets
         this.load.setPath('assets/img');
@@ -16,9 +17,10 @@ class firstBossScene extends Phaser.Scene
         this.load.image('bullet', 'bullet.png');
         //this.load.spritesheet('firstBoss', 'firstBoss.gif', {frameWidth: 95, frameHeight: 56});
         this.load.image('firstBoss', 'firstBoss.png');
-
+        
+        
         this.bulletPool = this.physics.add.group();
-
+       
        
     }
     create(){
@@ -27,7 +29,7 @@ class firstBossScene extends Phaser.Scene
         this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
         
         this.firstBoss = new firstBoss(this, gamePrefs.gameWidth/1.2, gamePrefs.gameHeight*.823,20, 360, 'firstBoss');
-        
+        this.setColliders();
          this.bossDashTimer = this.time.addEvent
         (
             {
@@ -48,5 +50,17 @@ class firstBossScene extends Phaser.Scene
             }
         );
     }
+
+    setColliders(){
+        this.physics.add.overlap 
+        ( 
+            this.bulletPool, 
+            this.firstBoss, 
+            this.firstBoss.bulletDamage,  
+            null, 
+            this.firstBoss,   
+        ); 
+    }
+
 
 }

@@ -38,6 +38,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
  
     //this.scene._bullet.deActivate();
     _bullet.deActivate();
+  //  _bullet.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
     if(--_enemy.health == 0){
         _enemy.destroy();
         console.log("no morido") 
