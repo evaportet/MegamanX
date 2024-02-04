@@ -43,7 +43,8 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
 
    die(_enemy, _bullet){ 
     //this.scene._bullet.deActivate();
-    this.scene.cameras.main.flash(250,0,50,50);           
+    this.scene.cameras.main.flash(250,0,50,50); 
+    this.scene.sound.play('enemyDie');          
     _bullet.deActivate();
   //  _bullet.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
     if(--_enemy.health == 0){

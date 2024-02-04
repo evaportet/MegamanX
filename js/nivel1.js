@@ -43,6 +43,13 @@ class nivel1 extends Phaser.Scene
         //AUDIO
         this.load.setPath('assets/sounds');
         this.load.audio('music','inGame.mp3');
+        this.load.audio('bomb','bomb.wav');
+        this.load.audio('die','die.wav');
+        this.load.audio('enemyDie','enemyDie.wav');
+        this.load.audio('hurt','hurt.wav');
+        this.load.audio('jump','jump.wav');
+        this.load.audio('shoot','shoot.wav');
+
         
     }
 
@@ -62,7 +69,7 @@ class nivel1 extends Phaser.Scene
         
             //LOAD POOLS
             this.loadPools(); 
-            this.loadSounds();
+ 
             //////PLAYER
             this._player = new player(this,110,gamePrefs.gameHeight/2 -20,'playerIdle');   
             // Set collisions
@@ -133,13 +140,11 @@ class nivel1 extends Phaser.Scene
         this.bombPool = this.physics.add.group();
     }
 
-    loadSounds(){
-        this.music = this.sound.add('music');
-
-    }
 
     update(){
         if(this._player.health == 0 || this._player.y > 500){
+            this.sound.play('die');
+            this.sound.get('music').stop();
             this.scene.start('gameOver');
         }
         if(this.flyerWalk.health == 0){
@@ -147,6 +152,7 @@ class nivel1 extends Phaser.Scene
         }
         if(this.firstBoss.health == 0){
             gamePrefs.WIN = true;
+            this.sound.get('music').stop();
             this.scene.start('gameOver');
         }
 

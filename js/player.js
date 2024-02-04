@@ -16,6 +16,7 @@ class player extends Phaser.GameObjects.Sprite
             'up',
             function()
             {
+                this.scene.sound.play('shoot');
                 this.createBullet();
             },
             this
@@ -134,6 +135,7 @@ class player extends Phaser.GameObjects.Sprite
         //SALTO
         if(this.cursors.up.isDown && this.body.onFloor() && Phaser.Input.Keyboard.DownDuration(this.cursors.up,250))
         {
+            this.scene.sound.play('jump');
             this.anims.play('jump', true);
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
