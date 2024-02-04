@@ -72,7 +72,7 @@ class player extends Phaser.GameObjects.Sprite
            this.scene.player_health_counter.text = --this.scene.player_health;
            this.scene.cameras.main.flash(250,255,0,0);     
        }  
-       }
+    }
 
     createBullet()
     {

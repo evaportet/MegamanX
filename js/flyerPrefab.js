@@ -45,7 +45,7 @@ class flyerPrefab extends enemiesPrefab
     {        
         if(this.health == 0){
             this.scene.time.removeEvent(this.scene.enemyTimer);
-           // console.log("entrooo==")
+           console.log("entrooo==")
         }
 
         this.anims.play('walkFlyer', true);
@@ -60,10 +60,6 @@ class flyerPrefab extends enemiesPrefab
         else if(this.body.position.x > this.leftPatrol && this.body.position.x < this.rightPatrol){
             this.body.setVelocityX(gamePrefs.FLYER_SPEED * this.direccion);
            // console.log('dentroooo')
-        }
-
-        if(this.health == 0){
-            this.scene.time.removeEvent(this.scene.enemyTimer);
         }
      //   console.log(this.health);
 

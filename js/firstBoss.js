@@ -9,8 +9,9 @@ class firstBoss extends enemiesPrefab{
         this.health = 7;
         //this._scene = scene;
        // console.log(this.leftPatrol)
-       this.body.collideWorldBounds = true; 
-       this.body.setGravityY(50);
+       //this.body.collideWorldBounds = true; 
+       
+       //this.body.setGravityY(50);
         this.flipX = true;
 
         this.onDash = false;

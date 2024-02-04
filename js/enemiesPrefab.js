@@ -30,7 +30,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
            this,
            this.die,
            null,
-           this.scene  
+           this  
        );  
 
        this.scene.physics.add.collider
@@ -40,15 +40,16 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         ); 
    }
 
+
    die(_enemy, _bullet){ 
- 
     //this.scene._bullet.deActivate();
+    this.scene.cameras.main.flash(250,0,50,50);           
     _bullet.deActivate();
   //  _bullet.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
     if(--_enemy.health == 0){
         _enemy.destroy();
         console.log("no morido") 
-        _enemy.health =0;
+        _enemy.health = 0;
     }
     else
     {
@@ -56,7 +57,6 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         console.log(_enemy.health);   
     }
         console.log("morisionado") 
-       //  this.scene.bulletPool.deActivate; no quiere hacer caso
         
    }
    

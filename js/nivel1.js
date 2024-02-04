@@ -13,7 +13,9 @@ class nivel1 extends Phaser.Scene
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
-        this.load.image('bomb', 'bomb.png');     
+        this.load.image('bomb', 'bomb.png');    
+        this.load.image('heart', 'heart.png'); 
+        this.load.image('firstBoss', 'firstBoss.png');
         
         //UI
         this.load.image('playerHP', 'player_health.png'); 
@@ -45,25 +47,17 @@ class nivel1 extends Phaser.Scene
             this.tilset = this.map.addTilesetImage('estesi');
             
             // Layers
-            // this.back = this.map.createLayer('Back', 'tileset');
             this.collision = this.map.createLayer('collision', 'estesi');
-            // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
-            // this.front = this.map.createLayer('Front', 'tileset');
-            
-            //this.map.createLayer('Back', 'tiles');
-            //this.walls = this.map.createLayer('Collision', 'tiles');
-            //this.map.createLayer('MovingPlatforms', 'tiles');
-            //this.map.createLayer('Front', 'tiles');
-            
+        
             //LOAD POOLS
             this.loadPools(); 
             //////PLAYER
-            this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/3,'player');   
+            this._player = new player(this,110,gamePrefs.gameHeight/2 -20,'player');   
             // Set collisions
             this.map.setCollisionByExclusion(-1, true, true, 'collision');
-
-        ////// ENEMY WALK
-            this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);
+            
+            ////// ENEMY WALK
+            this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);            
 
         ////// ENEMY FLY
             this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
@@ -74,6 +68,30 @@ class nivel1 extends Phaser.Scene
                 delay: 2000, //ms
                 callback: this.flyerWalk.createBomb,
                 callbackScope:this.flyerWalk,
+                loop:true //repeat: -1
+            }
+        );
+
+
+        //////// BOSSS
+        this.firstBoss = new firstBoss(this, 2239, gamePrefs.gameHeight/3,1839, 2292, 'firstBoss');
+
+        this.bossDashTimer = this.time.addEvent
+        (
+            {
+                delay: 2000, //ms
+                callback: this.firstBoss.dash,
+                callbackScope:this.firstBoss,
+                loop:true //repeat: -1
+            }
+        ); 
+
+        this.bossJumpTimer = this.time.addEvent
+        (
+            {
+                delay: 5000, //ms
+                callback: this.firstBoss.jump,
+                callbackScope:this.firstBoss,
                 loop:true //repeat: -1
             }
         );
@@ -99,10 +117,18 @@ class nivel1 extends Phaser.Scene
     }
 
     update(){
-        //console.log(this.player_health);
-       if(this._player.health ==0){
-        this.scene.start('gameOver');
-       }
+        if(this._player.health ==0){
+            this.scene.start('gameOver');
+        }
+        if(this.flyerWalk.health == 0){
+            this.time.removeEvent(this.enemyTimer);
+        }
+        if(this.firstBoss.health == 0){
+            gamePrefs.WIN = true;
+            this.scene.start('gameOver');
+        }
+
+        console.log(this._player.y);
     }
 
     loadAnimations()

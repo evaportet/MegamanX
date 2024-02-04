@@ -24,6 +24,9 @@ class gameOver extends Phaser.Scene{
         this.splashText = this.add.bitmapText(210, 155, 'font', 'GAME OVER' ,20).setOrigin(0.5).setScrollFactor(0);
         this.tryAgain = this.add.bitmapText(210, 185, 'font', 'Press space to try again' ,13).setOrigin(0.5).setScrollFactor(0);
 
+        if(gamePrefs.WIN){
+            this.splashText.text = 'YOU KILLED THE BOSS!'
+        }
 
         this.add.tween
         ({
