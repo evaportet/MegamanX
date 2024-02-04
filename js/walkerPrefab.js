@@ -5,6 +5,7 @@ class walkerPrefab extends enemiesPrefab
         super(_scene,_posX,_posY,_spriteTag);
         this.leftPatrol = _leftPatrol;
         this.rightPatrol = _rightPatrol;
+        this.health = 2;
         console.log('wwwwwww')
     }
 

@@ -13,7 +13,7 @@ class nivel1 extends Phaser.Scene
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
-
+        this.load.image('bomb', 'bomb.png');     
         ////// MAP
         //img
         this.load.setPath('assets/img');
@@ -61,7 +61,15 @@ class nivel1 extends Phaser.Scene
         ////// ENEMY FLY
             this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
 
-        
+            this.enemyTimer = this.time.addEvent
+        (
+            {
+                delay: 2000, //ms
+                callback: this.flyerWalk.createBomb,
+                callbackScope:this.flyerWalk,
+                loop:true //repeat: -1
+            }
+        );
 
         //////ANIMATION
             this.loadAnimationsWalker();
@@ -79,7 +87,7 @@ class nivel1 extends Phaser.Scene
     loadPools()
     {
         this.bulletPool = this.physics.add.group();
-
+        this.bombPool = this.physics.add.group();
     }
 
     setColliders(){
