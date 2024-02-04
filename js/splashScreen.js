@@ -14,22 +14,32 @@ class splashScreen extends Phaser.Scene{
         //font
         this.load.setPath('assets/fonts/');
         this.load.bitmapFont('font','titleFont.png','titleFont.xml');
+        //AUDIO
+        this.load.setPath('assets/sounds');
+        this.load.audio('music','splashScreen.mp3');
 
         this.time.addEvent(
-            {
-                delay: 2000,
-                callback: this.showText,
-                callbackScope: this,
-                repeat: 0,
-            }
+        {
+            delay: 2000,
+            callback: this.showText,
+            callbackScope: this,
+            repeat: 0,
+        }
         );
-
+            
         this.cursors = this.input.keyboard.createCursorKeys();
+       // this.loadSounds();
+    }
+    
+    loadSounds(){
+
+        this.music = this.sound.add('music');
+
     }
 
     create(){
         this.splashScreen = this.add.image(220,70,'splashScreen').setScale(0.5);
-
+       // this.sound.play('splash');
     }
 
     showText(){

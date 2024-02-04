@@ -32,6 +32,10 @@ class nivel1 extends Phaser.Scene
         //map
         this.load.setPath('assets/map');
         this.load.tilemapTiledJSON('tileset', 'ddefinitivo.json');
+
+        //AUDIO
+        this.load.setPath('assets/sounds');
+        this.load.audio('music','inGame.mp3');
         
     }
 
@@ -51,6 +55,7 @@ class nivel1 extends Phaser.Scene
         
             //LOAD POOLS
             this.loadPools(); 
+            this.loadSounds();
             //////PLAYER
             this._player = new player(this,110,gamePrefs.gameHeight/2 -20,'player');   
             // Set collisions
@@ -108,6 +113,9 @@ class nivel1 extends Phaser.Scene
         this.add.sprite(30,25,'playerHP').setScrollFactor(0);
         this.player_health = this._player.health ;
         this.player_health_counter = this.add.bitmapText(65, 28, 'font', this.player_health ,20).setOrigin(0.5).setScrollFactor(0);
+    
+        this.sound.play('music');
+    
     }
 
     loadPools()
@@ -116,8 +124,13 @@ class nivel1 extends Phaser.Scene
         this.bombPool = this.physics.add.group();
     }
 
+    loadSounds(){
+        this.music = this.sound.add('music');
+
+    }
+
     update(){
-        if(this._player.health ==0){
+        if(this._player.health == 0 || this._player.y > 500){
             this.scene.start('gameOver');
         }
         if(this.flyerWalk.health == 0){
