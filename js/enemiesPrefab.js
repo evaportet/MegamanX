@@ -48,7 +48,7 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
     if(--_enemy.health == 0){
         _enemy.destroy();
         console.log("no morido") 
-        _enemy.health =7;
+        _enemy.health =0;
     }
     else
     {

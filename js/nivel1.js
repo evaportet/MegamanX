@@ -67,7 +67,7 @@ class nivel1 extends Phaser.Scene
 
         ////// ENEMY FLY
             this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
-
+            this.bombTimer = this.flyerWalk.enemyTimer;
             this.enemyTimer = this.time.addEvent
         (
             {
@@ -100,6 +100,9 @@ class nivel1 extends Phaser.Scene
 
     update(){
         //console.log(this.player_health);
+       if(this._player.health ==0){
+        this.scene.start('gameOver');
+       }
     }
 
     loadAnimations()

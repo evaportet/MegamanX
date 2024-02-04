@@ -10,23 +10,22 @@ class flyerPrefab extends enemiesPrefab
         this.isAttacking = false;
         
     }
-
-
+    
 
     createBomb()
     {
         //Mirar si hay alguna bala reciclable en la pool
         var _bomb= this.scene.bombPool.getFirst(false);
-        console.log('creeo bombaa');
+     //   console.log('creeo bombaa');
         if(!_bomb)
         {//Que no? La creo
-            console.log('creando bala');
+         //   console.log('creando bala');
             _bomb = new enemyBombPrefab(this.scene,this.x,this.y,'bomb');
             _bomb.setSize(3,3);
             this.scene.bombPool.add(_bomb);
         }else
         {//Que si? La reciclo
-            console.log('reciclando bala');
+          //  console.log('reciclando bala');
             _bomb.body.reset(this.x,this.y);
             _bomb.active = true;
         }
@@ -44,6 +43,11 @@ class flyerPrefab extends enemiesPrefab
    
     preUpdate(time,delta)
     {        
+        if(this.health == 0){
+            this.scene.time.removeEvent(this.scene.enemyTimer);
+           // console.log("entrooo==")
+        }
+
         this.anims.play('walkFlyer', true);
         this.body.allowGravity = false; 
         
@@ -58,7 +62,10 @@ class flyerPrefab extends enemiesPrefab
            // console.log('dentroooo')
         }
 
-        
+        if(this.health == 0){
+            this.scene.time.removeEvent(this.scene.enemyTimer);
+        }
+     //   console.log(this.health);
 
         super.preUpdate(time, delta);
     }

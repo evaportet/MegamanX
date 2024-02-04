@@ -46,7 +46,7 @@ class player extends Phaser.GameObjects.Sprite
     {
         if(this.health == 0){
              this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3); 
-             this.health =3;
+           
         }
         else
         {
@@ -62,7 +62,8 @@ class player extends Phaser.GameObjects.Sprite
         _bomb.deActivate();
         if(this.health == 0){
             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3); 
-            this.health =3;
+            
+            console.log('y sera vd');
        }
        else
        {
@@ -103,6 +104,8 @@ class player extends Phaser.GameObjects.Sprite
 
     preUpdate(time,delta)
     {
+
+        this.scene.player_health = this.health;
         if(this.y>=config.height)
         {
             this.active = false;
