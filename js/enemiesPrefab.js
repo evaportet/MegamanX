@@ -10,7 +10,6 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
         this.direccion = -1;
         this.body.setVelocityX(gamePrefs.ENEMY_SPEED * this.direccion);
         this.setColliders();
-        this.health = 7;
     }
 
    setColliders()
@@ -29,35 +28,11 @@ class enemiesPrefab extends Phaser.GameObjects.Sprite
             this,
             this.scene.collision
         );   
-       ); 
-       
-        this.scene.physics.add.overlap
-       (
-           this.scene.bulletPool,
-           this,
-           this.die,
-           null,
-           this.scene  
-       );  
    }
 
-   die(_enemy, _bullet){ 
- 
-    //this.scene._bullet.deActivate();
-    _bullet.deActivate();
-    if(--_enemy.health == 0){
-        _enemy.destroy();
-        console.log("no morido") 
-        _enemy.health =7;
-    }
-    else
-    {
-        //_enemy.health--;
-        console.log(_enemy.health);   
-    }
+   die(){ 
         console.log("morisionado") 
-       //  this.scene.bulletPool.deActivate; no quiere hacer caso
-        
+        this.destroy();
    }
    
 }

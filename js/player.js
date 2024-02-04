@@ -9,22 +9,7 @@ class player extends Phaser.GameObjects.Sprite
         this.health = 5;
         this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-               
-            //DISPARO
-                this.cursors.space.on
-                (
-                    'up',
-                    function()
-                    {
-                        this.createBullet();
-                    },
-                    this
-                );
     }
-    
-    create(){
-
-    }  
 
     setColliders()
     {
@@ -75,7 +60,6 @@ class player extends Phaser.GameObjects.Sprite
             _bullet.setFlipX(false);
         }
     }
-     
 
     preUpdate(time,delta)
     {
@@ -105,9 +89,17 @@ class player extends Phaser.GameObjects.Sprite
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
+        //DISPARO
+        this.cursors.space.on
+        (
+            'down',
+            function()
+            {
+                this.createBullet();
+            },
+            this
+        );
         
-        //console.log(this.body.x)
-
         super.preUpdate(time,delta);
         /*
         if (this.shiftKey.isDown && !this.dashing) 

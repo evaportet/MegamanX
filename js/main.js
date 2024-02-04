@@ -8,7 +8,6 @@ var gamePrefs=
     STAGE_BG_HEIGHT:212,
     BULLET_SPEED:170,
     ENEMY_SPEED: 60,
-    ENEMY_JUMP: 50,
     WALKER_SPEED: 60,
     FLYER_SPEED: 60
 }
@@ -18,7 +17,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene:[ firstBossScene, nivel1], //array con las escenas
+    scene:[nivel1], //array con las escenas
     render:
     {
         pixelArt:true
