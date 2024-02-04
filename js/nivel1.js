@@ -15,6 +15,7 @@ class nivel1 extends Phaser.Scene
         this.load.spritesheet('playerJump', 'jump.png', {frameWidth: 29, frameHeight: 46});
         
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
+
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
 
         this.load.image('bullet', 'bullet.png'); 
@@ -188,7 +189,8 @@ class nivel1 extends Phaser.Scene
                 frames:this.anims.generateFrameNumbers('walker', {start:2, end: 9}),
                 frameRate: 10,
                 repeat: -1
-            });
+            }
+        );
     }
 
     loadAnimationsFlyer()
@@ -205,7 +207,7 @@ class nivel1 extends Phaser.Scene
         this.anims.create(
             {
                 key: 'attackFlyer',
-                frames:this.anims.generateFrameNumbers('flyer', {start:3, end: 8}),
+                frames:this.anims.generateFrameNumbers('flyer', {start:3, end: 7}),
                 frameRate: 10,
                 repeat: -1
             }
