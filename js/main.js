@@ -1,7 +1,7 @@
 var gamePrefs=
 {
-    PLAYER_SPEED: 100,
-    PLAYER_JUMP: 185,
+    PLAYER_SPEED: 150,
+    PLAYER_JUMP: 400,
     gameWidth:424,
     gameHeight:212,
     STAGE_BG_WIDTH: 7689,
@@ -18,7 +18,7 @@ var config =
     type: Phaser.AUTO,
     width: gamePrefs.gameWidth,
     height: gamePrefs.gameHeight,
-    scene:[ firstBossScene, nivel1], //array con las escenas
+    scene:[ nivel1, firstBossScene], //array con las escenas
     render:
     {
         pixelArt:true
@@ -33,7 +33,7 @@ var config =
         default:'arcade',
         arcade:
         {
-            gravity:{y:0}, //we will need to change this
+            gravity:{y:900}, //we will need to change this
             debug: true 
         }
     }

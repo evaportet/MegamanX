@@ -9,62 +9,70 @@ class nivel1 extends Phaser.Scene
     { 
         ////// PLAYER ASSETS
         this.load.setPath('assets/img');
-        this.load.image('backG', 'background_loop.png');
         this.load.image('player','playerIdle.png');
         this.load.spritesheet('walker', 'enemies.png', {frameWidth: 49, frameHeight: 61});
         this.load.spritesheet('flyer', 'flyer.png', {frameWidth: 48, frameHeight: 47});
         this.load.image('bullet', 'bullet.png'); //cargado como img porque la distancia entre frames cambia
 
         ////// MAP
+        //img
+        this.load.setPath('assets/img');
+        this.load.image('backG', 'background_loop.png');
+        this.load.image('estesi', 'background_stage.png');
+
+        //map
         this.load.setPath('assets/map');
-        this.load.tilemapTiledJSON('level1','map1.json');
+        this.load.tilemapTiledJSON('tileset', 'ddefinitivo.json');
+        
     }
 
     create()
     { 
         //////BACKGROUND
-        this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
-        
-        //////MAP
-        //Cargo el JSON
-        this.map = this.add.tilemap('map1');
-        //Cargo los tilesets
-        this.map.addTilesetImage('walls_tileset');
-        //this.map.addTilesetImage('moss_tileset');
-        //Pinto las CAPAS/LAYERS
-        this.walls = this.map.createLayer(' ','walls_tileset');
-        /* this.map.createLayer('layer_moss_up','moss_tileset');
-        this.map.createLayer('layer_moss_left','moss_tileset');
-        this.map.createLayer('layer_moss_right','moss_tileset');
-        this.map.createLayer('layer_moss_bottom','moss_tileset'); */
-
-        //Defino con qué se colisiona en la layer_walls
-        this.map.setCollisionBetween(1,11,true,true,'layer_walls');
-        //Ponemos -1, ya que phaser lo interpreta como un 0 en el json 
-        this.map.setCollisionByExclusion(-1,true,true,'layer_walls'); 
-
-        //////PLAYER
-        this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95,'player');   
+            this.bg_back = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'backG').setOrigin(0);
+            this.bg = this.add.tileSprite(0,0,gamePrefs.STAGE_BG_WIDTH, gamePrefs.STAGE_BG_HEIGHT, 'estesi').setOrigin(0);
+            
+            
+            //////MAP
+            this.map = this.add.tilemap('tileset');
+            this.tilset = this.map.addTilesetImage('estesi');
+            
+            // Layers
+            // this.back = this.map.createLayer('Back', 'tileset');
+            this.collision = this.map.createLayer('collision', 'estesi');
+            // this.movingPlatforms = this.map.createLayer('MovingPlatforms', 'tileset');
+            // this.front = this.map.createLayer('Front', 'tileset');
+            
+            //this.map.createLayer('Back', 'tiles');
+            //this.walls = this.map.createLayer('Collision', 'tiles');
+            //this.map.createLayer('MovingPlatforms', 'tiles');
+            //this.map.createLayer('Front', 'tiles');
+            
+            
+            //////PLAYER
+            this._player = new player(this,gamePrefs.gameWidth/2,gamePrefs.gameHeight/3,'player');   
+            // Set collisions
+            this.map.setCollisionByExclusion(-1, true, true, 'collision');
 
         ////// ENEMY WALK
-        this.enemyWalk = new walkerPrefab(this, 300, 188, 100, 300);
+          //  this.enemyWalk = new walkerPrefab(this, 450, 70, 100, 300);
 
         ////// ENEMY FLY
-        this.flyerWalk = new flyerPrefab(this, 300, 100, 100, 300);     
+          //  this.flyerWalk = new flyerPrefab(this, 300, 70, 100, 300);     
 
         //LOAD POOLS
-        this.loadPools();
+            this.loadPools();
 
         //////ANIMATION
-        this.loadAnimationsWalker();
-        this.loadAnimationsFlyer();
+            this.loadAnimationsWalker();
+            this.loadAnimationsFlyer();
 
         ///// COLLISIONS
         this.setColliders();
 
         //CAMERA
-        this.cameras.main.startFollow(this._player);
-        this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH, 0);
+            this.cameras.main.startFollow(this._player);
+            this.cameras.main.setBounds(0,0, gamePrefs.STAGE_BG_WIDTH,  gamePrefs.STAGE_BG_HEIGHT);
         
     }
 

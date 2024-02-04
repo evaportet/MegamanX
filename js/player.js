@@ -5,31 +5,25 @@ class player extends Phaser.GameObjects.Sprite
         super(_scene,_posX,_posY,_spriteTag);
         _scene.add.existing(this);
         _scene.physics.world.enable(this);
-        this.body.collideWorldBounds = true; // a ver las fisicas...
-        this.body.setGravityY(300);
+        //this.body.collideWorldBounds = true; // a ver las fisicas... 
         this.health = 5;
+        this.setColliders();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-               
-            //DISPARO
-                this.cursors.space.on
-                (
-                    'up',
-                    function()
-                    {
-                        this.createBullet();
-                    },
-                    this
-                );
     }
-    
-    create(){
 
-    }  
+    setColliders()
+    {
+        this.scene.physics.add.collider
+        (
+            this,
+            this.scene.collision
+        );        
+    }
 
     hitPlayer(_player,_enemy)
     {
         if(this.health == 0){
-             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight*.95);
+             this.body.reset(gamePrefs.gameWidth/2,gamePrefs.gameHeight/3);
              this.health =5;
         }
         else
@@ -66,7 +60,6 @@ class player extends Phaser.GameObjects.Sprite
             _bullet.setFlipX(false);
         }
     }
-     
 
     preUpdate(time,delta)
     {
@@ -96,21 +89,31 @@ class player extends Phaser.GameObjects.Sprite
             this.body.setVelocityY(-gamePrefs.PLAYER_JUMP);
         }
 
+        //DISPARO
+        this.cursors.space.on
+        (
+            'down',
+            function()
+            {
+                this.createBullet();
+            },
+            this
+        );
         
-        //console.log(this.body.x)
-
         super.preUpdate(time,delta);
-
-        // if (this.shiftKey.isDown) //&& !this.dashing
-        //{
-            //this.dashing = true;
-            //this._player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
-            //_player.anims.play('dash',true);
+        /*
+        if (this.shiftKey.isDown && !this.dashing) 
+        {
+            this.dashing = true;
+            this._player.setVelocityX((_player.flipX ? -1 : 1) * 500); //indicates if the player is facing left or right and multiplies the vel
+            this.anims.play('dash',true);
             
             //to set the dash back to false
-            //this.time.delayedCall(200, () => {
-            //    this.dashing = false;
-            //});
-        //}  
-    }
+            this.time.delayedCall(200, () => {
+                this.dashing = false;
+            });
+            
+        }  
+        */
+    } 
 }
