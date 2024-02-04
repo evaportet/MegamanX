@@ -70,11 +70,10 @@ class nivel1 extends Phaser.Scene
             
             ////// ENEMY WALK
             this.enemyWalk = new walkerPrefab(this, 550, 70, 400, 700);
-            this.enemyWalk1 = new walkerPrefab(this, 1500, 70, 1400, 1800);       
+            this.enemyWalk1 = new walkerPrefab(this, 950, 70, 900, 1200);       
 
             ////// ENEMY FLY
-            this.flyerWalk = new flyerPrefab(this, 1000, 20, 850, 1300); 
-            this.flyerWalk1 = new flyerPrefab(this, 1800, 20, 1700, 1900);     
+            this.flyerWalk = new flyerPrefab(this, 1250, 20, 850, 1300); 
             this.bombTimer = this.flyerWalk.enemyTimer;
             this.enemyTimer = this.time.addEvent
             (
@@ -88,7 +87,7 @@ class nivel1 extends Phaser.Scene
 
 
         //////// BOSSS
-        this.firstBoss = new firstBoss(this, 2239, gamePrefs.gameHeight/3,1839, 2292, 'firstBoss');
+        this.firstBoss = new firstBoss(this, 2220, gamePrefs.gameHeight/3,1500, 2292, 'firstBoss');
 
         this.bossDashTimer = this.time.addEvent
         (

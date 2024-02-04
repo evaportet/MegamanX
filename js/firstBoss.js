@@ -44,6 +44,9 @@ class firstBoss extends enemiesPrefab{
             this.direccion *= -1;
             this.flipX = !this.flipX;
         }
+        if(this.body.position.x>=this.leftPatrol){
+            this.body.position.x = this.leftPatrol + 10;
+        }
 
         //Movement
         if(this.onDash){
